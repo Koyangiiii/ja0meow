@@ -2,338 +2,510 @@
 <html lang="th">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>JaoMeowStore - Service</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght=600;800&family=Kanit:wght@300;400;500;600&display=swap" rel="stylesheet">
-<script>
-tailwind.config = {
-theme: {
-extend: {
-fontFamily: {
-sans: ['Kanit', 'sans-serif'],
-serif: ['Cinzel', 'serif'],
-},
-colors: {
-magic: {
-900: '#0f0518',
-800: '#1c0312',
-700: '#4a082b',
-600: '#85104d',
-500: '#db2777',
-400: '#f472b6',
-300: '#fbcfe8',
-200: '#fce7f3',
-}
-},
-boxShadow: {
-'neon': '0 0 15px rgba(219, 39, 119, 0.6), inset 0 0 10px rgba(219, 39, 119, 0.4)',
-'neon-strong': '0 0 25px rgba(219, 39, 119, 0.8), inset 0 0 15px rgba(219, 39, 119, 0.5)',
-}
-}
-}
-}
-</script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>JaoMeowStore 🌌</title>
+<link href="https://fonts.googleapis.com/css2?family=Kanit:wght@300;400;500;600;700&family=Mitr:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
+* { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+:root {
+/* เปลี่ยนโทนสีเป็น ดำ + ชมพู ตามบรีฟ */
+--primary: #ff4aa2; /* ชมพูเด่น */
+--secondary: #ff7ebb; /* ชมพูอ่อน/ฟ้าสว่างเดิมปรับเป็นชมพู */
+--bg-main: #0a080d; /* พื้นหลังหน้าเว็บ ดำลึก */
+--bg-card: #16121a; /* พื้นหลังการ์ด ดำอมม่วงชมพู */
+--border-color: rgba(255, 74, 162, 0.25);
+--text-muted: #ba8baf;
+}
+html { scroll-behavior: smooth; }
 body {
-background-color: #0d0208;
-background-image:
-radial-gradient(circle at 15% 50%, rgba(74, 8, 43, 0.4), transparent 25%),
-radial-gradient(circle at 85% 30%, rgba(133, 16, 77, 0.3), transparent 25%);
-color: #ffffff;
-min-height: 100vh;
+font-family: 'Kanit', sans-serif;
+background: var(--bg-main); color: #fff;
 overflow-x: hidden;
+padding-bottom: 110px; /* เว้นที่ให้ตะกร้าล่างสุด */
 }
-.glass-panel {
-background: linear-gradient(135deg, rgba(28, 3, 18, 0.7) 0%, rgba(15, 5, 24, 0.8) 100%);
-backdrop-filter: blur(10px);
-border: 1px solid rgba(219, 39, 119, 0.3);
+/* Background Glow Effects */
+.bg-glow-1 {
+position: fixed; top: -100px; left: -100px; width: 300px; height: 300px;
+background: radial-gradient(circle, rgba(255,74,162,0.15) 0%, rgba(0,0,0,0) 70%);
+z-index: -1; pointer-events: none;
 }
-.price-box {
-background: linear-gradient(90deg, rgba(74, 8, 43, 0.8) 0%, rgba(28, 3, 18, 0.6) 100%);
-border: 1px solid rgba(219, 39, 119, 0.5);
+.bg-glow-2 {
+position: fixed; bottom: 20%; right: -150px; width: 400px; height: 400px;
+background: radial-gradient(circle, rgba(255,74,162,0.15) 0%, rgba(0,0,0,0) 70%);
+z-index: -1; pointer-events: none;
+}
+/* Particles */
+#pts { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
+.pt { position: absolute; animation: ptUp linear infinite; opacity: 0; }
+@keyframes ptUp {
+0% { transform: translateY(105vh); opacity: 0; }
+8% { opacity: 0.45; }
+92% { opacity: 0.45; }
+100% { transform: translateY(-8vh) rotate(360deg); opacity: 0; }
+}
+/*
+--- HERO & TABS SECTION ---
+*/
+.hero {
+/* ปรับเป็นโทนสี ดำ + ชมพู ตามที่สั่ง */
+background: linear-gradient(135deg, rgba(22, 18, 26, 0.95) 0%, rgba(255, 74, 162, 0.15) 100%);
+padding: 40px 20px 65px;
+text-align: center;
+position: relative;
+border-bottom: 1px solid var(--border-color);
+margin-bottom: 40px;
+box-shadow: 0 4px 30px rgba(255, 74, 162, 0.1);
+}
+/* ปรับให้ชื่อร้านตัวหนาและใหญ่ขึ้นเล็กน้อย */
+.hero-title {
+font-family: 'Mitr', sans-serif;
+font-size: 38px; font-weight: 800; color: #fff;
+margin-bottom: 8px; letter-spacing: 0.5px;
+text-shadow: 0 0 15px rgba(255, 74, 162, 0.6);
+}
+.hero-sub {
+font-size: 13px; color: rgba(255,255,255,0.85);
+margin-bottom: 15px;
+line-height: 1.4;
+}
+
+/* เพิ่ม CSS สำหรับส่วนประกอบสำคัญที่สั่งให้คงไว้ */
+.badges-container {
+display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;
+}
+.badge-item {
+width: 12px; height: 12px; border-radius: 50%; background: var(--primary);
+box-shadow: 0 0 8px var(--primary); display: inline-block;
+}
+.badge-item:nth-child(2) { background: var(--secondary); box-shadow: 0 0 8px var(--secondary); }
+.badge-item:nth-child(3) { background: #fff; box-shadow: 0 0 8px #fff; }
+
+.status-bar {
+background: rgba(0, 0, 0, 0.4); border-radius: 20px; padding: 6px 14px;
+display: inline-flex; align-items: center; gap: 8px; font-size: 11px; color: var(--secondary);
+margin-bottom: 12px; border: 1px solid rgba(255,74,162,0.2);
+}
+.status-dot { width: 6px; height: 6px; background: #00ff00; border-radius: 50%; animation: blink 1.5s infinite; }
+@keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
+
+.queue-btn-dashed {
+display: inline-block; padding: 6px 16px; border: 1.5px dashed var(--primary);
+border-radius: 20px; font-size: 12px; color: #fff; text-decoration: none;
+background: transparent; transition: all 0.2s; margin-bottom: 10px; cursor: pointer;
+}
+.queue-btn-dashed:hover { background: rgba(255,74,162,0.1); }
+
+/* แถบปุ่มสลับหน้าแบบแนวยาว เล็กกะทัดรัด */
+.tab-container {
+position: absolute;
+bottom: -20px;
+left: 50%;
+transform: translateX(-50%);
+display: flex;
+background: var(--bg-card);
+border: 1px solid var(--border-color);
+border-radius: 30px;
+padding: 4px;
+width: 260px;
+z-index: 10;
+box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+}
+.tab-btn {
+flex: 1;
+padding: 8px 0;
+border-radius: 25px;
+border: none;
+font-family: inherit;
+font-size: 13px;
+font-weight: 600;
+cursor: pointer;
 transition: all 0.3s ease;
+background: transparent;
+color: var(--text-muted);
 }
-.price-box:hover {
-transform: translateX(10px) scale(1.02);
-box-shadow: 0 0 20px rgba(219, 39, 119, 0.8), inset 0 0 15px rgba(219, 39, 119, 0.4);
-border-color: rgba(252, 231, 243, 0.8);
+.tab-btn.active {
+background: linear-gradient(135deg, var(--primary), var(--secondary));
+color: #fff;
+box-shadow: 0 2px 10px rgba(255, 74, 162, 0.3);
 }
-.text-glow {
-text-shadow: 0 0 10px rgba(251, 207, 232, 0.8), 0 0 20px rgba(219, 39, 119, 0.6);
+/*
+--- CONTENT ---
+*/
+.content { max-width: 600px; margin: 0 auto; padding: 0 20px 50px; position: relative; z-index: 5; }
+.tab-content { display: none; animation: fadeIn 0.3s ease; }
+.tab-content.active { display: block; }
+@keyframes fadeIn {
+from { opacity: 0; transform: translateY(10px); }
+to { opacity: 1; transform: translateY(0); }
 }
-.title-glow {
-text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 15px rgba(219, 39, 119, 0.8), 0 0 30px rgba(219, 39, 119, 0.6);
+/*
+--- INFO TAB ---
+*/
+.info-card {
+background: var(--bg-card);
+border: 1px solid var(--border-color);
+border-radius: 20px;
+padding: 30px 24px;
+text-align: center;
+box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
-@keyframes title-glow-pulse {
-0%, 100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 15px rgba(219, 39, 119, 0.8), 0 0 30px rgba(219, 39, 119, 0.6); }
-50% { text-shadow: 2px 2px 4px rgba(0,0,0,0.8), 0 0 20px rgba(244, 114, 182, 1), 0 0 40px rgba(251, 207, 232, 0.9); }
+.info-card-title {
+font-size: 18px; font-weight: 700; color: var(--secondary); margin-bottom: 4px;
 }
-.title-animated {
-animation: title-glow-pulse 3.5s ease-in-out infinite;
-display: inline-block;
+.info-card-sub {
+font-size: 13px; color: var(--text-muted); margin-bottom: 24px;
 }
-@keyframes float {
-0% { transform: translateY(0px) rotate(0deg); }
-50% { transform: translateY(-20px) rotate(5deg); }
-100% { transform: translateY(0px) rotate(0deg); }
+.info-row {
+display: flex; justify-content: space-between; align-items: center;
+padding: 14px 0;
+border-bottom: 1px dashed rgba(255,255,255,0.1);
+font-size: 14px;
 }
-.floating {
-animation: float 6s ease-in-out infinite;
+.info-row:last-of-type { border-bottom: none; margin-bottom: 20px; }
+.info-row span:first-child { color: var(--primary); font-weight: 600; }
+.info-row span:last-child { color: #fff; font-weight: 500; }
+.review-placeholder {
+border: 1.5px dashed rgba(255,255,255,0.15);
+border-radius: 12px;
+padding: 16px;
+font-size: 12px;
+color: var(--text-muted);
+background: rgba(255,255,255,0.02);
 }
-@keyframes pulse-glow {
-0%, 100% { opacity: 0.5; transform: scale(1); }
-50% { opacity: 1; transform: scale(1.1); }
+/*
+--- PRODUCTS TAB ---
+*/
+.sh { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding: 0 5px; }
+.sh-line {
+width: 4px; height: 22px;
+background: linear-gradient(180deg, var(--primary), var(--secondary));
+border-radius: 4px;
 }
-.star-pulse {
-animation: pulse-glow 4s ease-in-out infinite;
+.sh h2 { font-size: 18px; font-weight: 700; color: #fff; }
+.grid-container {
+display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px;
 }
+.item-card {
+background: var(--bg-card); border: 1.5px solid rgba(255,255,255,0.08);
+border-radius: 166px; padding: 16px; position: relative;
+cursor: pointer; transition: all 0.2s ease;
+display: flex; flex-direction: column;
+border-radius: 16px;
+}
+.item-card:active { transform: scale(0.96); }
+.item-card.selected {
+border-color: var(--primary);
+background: linear-gradient(145deg, rgba(255, 74, 162, 0.1) 0%, var(--bg-card) 100%);
+box-shadow: 0 0 15px rgba(255, 74, 162, 0.2);
+}
+.check-circle {
+position: absolute; top: 12px; right: 12px;
+width: 22px; height: 22px; border-radius: 50%;
+border: 2px solid rgba(255,255,255,0.15);
+display: flex; justify-content: center; align-items: center;
+transition: all 0.2s;
+}
+.item-card.selected .check-circle { background: var(--primary); border-color: var(--primary); }
+.check-circle::after {
+content: '✓'; color: #fff; font-size: 12px; font-weight: bold;
+opacity: 0; transform: scale(0.5); transition: all 0.2s;
+}
+.item-card.selected .check-circle::after { opacity: 1; transform: scale(1); }
+.card-icon { font-size: 30px; margin-bottom: 10px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5)); }
+.card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: #fff; line-height: 1.2; }
+.card-desc { font-size: 11px; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px; flex-grow: 1; }
+.card-price {
+align-self: flex-start; background: rgba(255, 74, 162, 0.15);
+color: #ff9ecf; font-weight: 600; font-size: 13px;
+padding: 4px 10px; border-radius: 8px;
+}
+.cat-divider { grid-column: 1 / -1; margin: 10px 0 5px; display: flex; align-items: center; gap: 10px; }
+.cat-divider span { font-size: 14px; font-weight: 600; color: var(--secondary); }
+.cat-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255, 74, 162, 0.2); }
+/*
+--- FLOATING BOTTOM BAR ---
+*/
+.bottom-bar {
+position: fixed; bottom: 0; left: 0; right: 0;
+background: rgba(22, 18, 26, 0.95); backdrop-filter: blur(15px);
+border-top: 1px solid var(--primary); padding: 15px 24px;
+display: flex; justify-content: space-between; align-items: center;
+transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+box-shadow: 0 -10px 30px rgba(0,0,0,0.5); z-index: 1000;
+}
+.bottom-bar.active { transform: translateY(0); }
+.bb-info { display: flex; flex-direction: column; }
+.bb-count { font-size: 12px; color: var(--text-muted); margin-bottom: 2px; }
+.bb-total { font-size: 20px; font-weight: 700; color: #fff; }
+.bb-total span { color: var(--primary); font-size: 16px; margin-right: 2px; }
+.bb-btn {
+background: linear-gradient(135deg, var(--primary), #ff7ebb);
+color: #fff; border: none; border-radius: 25px;
+padding: 10px 24px; font-size: 16px; font-weight: 600; font-family: inherit;
+box-shadow: 0 4px 15px rgba(255, 74, 162, 0.4); cursor: pointer; transition: transform 0.2s;
+}
+.bb-btn:active { transform: scale(0.95); }
+/*
+--- MODAL SUMMARY ---
+*/
+.modal-overlay {
+position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+z-index: 2000; display: flex; justify-content: center; align-items: center;
+opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.modal-overlay.show { opacity: 1; pointer-events: all; }
+.modal-box {
+background: var(--bg-card); border: 2px solid var(--primary);
+border-radius: 20px; width: 90%; max-width: 400px; padding: 24px;
+position: relative; transform: scale(0.9); transition: transform 0.3s;
+box-shadow: 0 10px 30px rgba(255, 74, 162, 0.3);
+}
+.modal-overlay.show .modal-box { transform: scale(1); }
+.modal-header {
+display: flex; justify-content: space-between; align-items: center;
+margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px;
+}
+.modal-title { font-size: 18px; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 8px; }
+.modal-close { font-size: 24px; color: var(--text-muted); cursor: pointer; line-height: 1; }
+.modal-items { max-height: 250px; overflow-y: auto; margin-bottom: 15px; padding-right: 5px; }
+.modal-item {
+display: flex; justify-content: space-between; align-items: flex-start;
+margin-bottom: 10px; font-size: 14px; color: #fff; gap: 10px;
+}
+.modal-item-name { flex: 1; line-height: 1.4; }
+.modal-item-price { color: #ff9ecf; font-weight: 600; }
+.modal-divider { border-top: 1px dashed rgba(255, 74, 162, 0.4); margin: 15px 0; }
+.modal-total {
+display: flex; justify-content: space-between; align-items: center;
+font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 24px;
+}
+.modal-total-price { font-size: 24px; color: var(--primary); font-weight: 700; }
+.modal-btn {
+background: #00d300; color: #fff; border: none; width: 100%;
+padding: 14px; border-radius: 12px; font-size: 16px; font-weight: 600; font-family: inherit;
+cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;
+box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
+}
+.modal-btn:active { transform: scale(0.97); }
+.modal-items::-webkit-scrollbar { width: 4px; }
+.modal-items::-webkit-scrollbar-track { background: var(--bg-main); }
+.modal-items::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
 </style>
 </head>
-<body class="flex flex-col items-center justify-center p-4 md:p-8 gap-4">
-<div class="fixed top-10 left-10 opacity-30 star-pulse" style="animation-delay: 0s;">
-<svg width="40" height="40" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 2L13.5 9.5L21 11L13.5 12.5L12 20L10.5 12.5L3 11L10.5 9.5L12 2Z" fill="#fbcfe8" />
-</svg>
+<body>
+<div class="bg-glow-1"></div>
+<div class="bg-glow-2"></div>
+<div id="pts"></div>
+<div class="hero">
+<div class="badges-container">
+<span class="badge-item"></span>
+<span class="badge-item"></span>
+<span class="badge-item"></span>
 </div>
-<div class="fixed bottom-20 right-20 opacity-40 star-pulse" style="animation-delay: 1s;">
-<svg width="60" height="60" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 2L13.5 9.5L21 11L13.5 12.5L12 20L10.5 12.5L3 11L10.5 9.5L12 2Z" fill="#f472b6" />
-</svg>
+<div class="status-bar">
+<span class="status-dot"></span>
+<span>สถานะระบบ: เปิดรับออเดอร์ปกติ</span>
 </div>
-<div class="fixed top-1/3 right-10 opacity-20 star-pulse" style="animation-delay: 2s;">
-<svg width="30" height="30" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 2L13.5 9.5L21 11L13.5 12.5L12 20L10.5 12.5L3 11L10.5 9.5L12 2Z" fill="#fce7f3" />
-</svg>
+<br>
+<div class="queue-btn-dashed" onclick="alert('กำลังเปิดระบบเช็คคิว...')">
+📋 คลิกเพื่อเช็คคิวงานปัจจุบัน
 </div>
-
-<main class="relative w-full max-w-6xl glass-panel rounded-[2rem] overflow-hidden shadow-2xl flex flex-col lg:flex-row">
-<section class="w-full lg:w-[55%] p-6 md:p-10 lg:p-12 z-10 flex flex-col relative">
-<div class="mb-10 relative w-fit max-w-full">
-<div class="flex gap-2 mb-4">
-<span class="px-3 py-1 text-xs rounded-full bg-magic-700 text-magic-200 border border-magic-500/50">Open</span>
-<span class="px-3 py-1 text-xs rounded-full bg-magic-800 text-magic-300 border border-magic-600/50">Fast Service</span>
+<div class="hero-title">JaoMeowStore</div>
+<div class="hero-sub">เจ้าเหมียวรับทำ ป้าย โลโก้ ลายน้ำ คิวชีต ชีตรายรับ - รายจ่าย</div>
+<div class="tab-container">
+<button class="tab-btn" id="btn-info" onclick="switchTab('info')">ข้อมูลร้าน</button>
+<button class="tab-btn active" id="btn-products" onclick="switchTab('products')">สินค้า</button>
 </div>
-
-<svg class="absolute -top-3 -left-2 md:-left-4 w-6 h-6 text-magic-200 star-pulse z-20" style="animation-delay: 0.5s;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 2L13.5 9.5L21 11L13.5 12.5L12 20L10.5 12.5L3 11L10.5 9.5L12 2Z" fill="currentColor" />
-</svg>
-<svg class="absolute bottom-8 -right-3 md:-right-5 w-5 h-5 text-magic-300 star-pulse z-20" style="animation-delay: 1.5s;" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 2L13.5 9.5L21 11L13.5 12.5L12 20L10.5 12.5L3 11L10.5 9.5L12 2Z" fill="currentColor" />
-</svg>
-
-<h1 class="font-serif text-5xl sm:text-6xl lg:text-7xl font-extrabold text-transparent bg-clip-text bg-gradient-to-b from-white via-magic-200 to-magic-500 title-animated tracking-wider mb-2 relative z-10 whitespace-nowrap">
-JaoMeowStore
-</h1>
-<h2 class="text-base md:text-sm lg:text-base font-medium text-magic-200 tracking-wide uppercase flex items-center gap-2 relative z-10">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-magic-400 shrink-0">
-<path d="M14.5 17.5L3 6V3H6L17.5 14.5M13 19L19 13L21 15L15 21L13 19Z"/>
-<path d="M19 13L17.5 14.5M13 19L14.5 17.5"/>
-</svg>
-เจ้าเหมียวรับทำ ป้าย โลโก้ ลายน้ำ คิวชีต ชีตรายรับ - รายจ่าย
-</h2>
-
-<div class="mt-4 p-3 bg-black/40 rounded-xl border border-magic-500/20 flex flex-col sm:flex-row items-center justify-between gap-3 w-full">
-<div class="flex items-center gap-2 text-xs text-gray-300">
-<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-สถานะคิวงานปกติ: กำลังดำเนินการอยู่อีก 2 คิว
 </div>
-<button class="border border-dashed border-magic-400 text-magic-300 hover:text-white hover:border-solid px-3 py-1 rounded text-xs transition-all">
-เช็คคิวงานที่นี่
+<div class="content">
+<div id="tab-info" class="tab-content">
+<div class="info-card">
+<h3 class="info-card-title">Showcase & Contact</h3>
+<p class="info-card-sub">ช่องทางการติดต่อและรายละเอียดร้านค้า</p>
+<div class="info-row">
+<span>Line</span>
+<span>@997pfoig</span>
+</div>
+<div class="info-row">
+<span>Facebook</span>
+<span>JaoMeowStore</span>
+</div>
+<div class="info-row">
+<span>เวลาทำการ</span>
+<span>11:00 - 00:00 น.</span>
+</div>
+<div class="info-row">
+<span>การรับประกัน</span>
+<span>งานด่วน เร็ว ทันใจ</span>
+</div>
+<div class="info-row">
+<span style="color:#ff9ecf;">หมายเหตุ</span>
+<span style="font-size:12px; text-align:right;">กรุณาแจ้งบรีฟงานอย่างละเอียด<br>เพื่อความรวดเร็วในการจัดทำค่ะ</span>
+</div>
+<div class="review-placeholder">
+พื้นที่แสดงรีวิวลูกค้า (Coming Soon)
+</div>
+</div>
+</div>
+<div id="tab-products" class="tab-content active">
+<div class="sh">
+<div class="sh-line"></div>
+<h2>หมวดหมู่สินค้า / บริการ</h2>
+</div>
+<div class="grid-container" id="productGrid">
+</div>
+</div>
+</div>
+<div class="bottom-bar" id="bottomBar">
+<div class="bb-info">
+<div class="bb-count" id="cartCount">เลือก 0 รายการ</div>
+<div class="bb-total"><span>฿</span><span id="cartTotal">0</span></div>
+</div>
+<button class="bb-btn" onclick="openSummary()">สั่งเลย ✨</button>
+</div>
+<div class="modal-overlay" id="summaryModal">
+<div class="modal-box">
+<div class="modal-header">
+<div class="modal-title">🛒 สรุปรายการสั่งซื้อ</div>
+<div class="modal-close" onclick="closeSummary()">×</div>
+</div>
+<div class="modal-items" id="modalItemsList">
+</div>
+<div class="modal-divider"></div>
+<div class="modal-total">
+<span>ยอดที่ต้องชำระ:</span>
+<span class="modal-total-price">฿<span id="modalTotalPrice">0</span></span>
+</div>
+<button class="modal-btn" onclick="checkout()">
+💬 คัดลอก & สั่งผ่าน LINE
 </button>
 </div>
 </div>
-
-<div class="flex flex-col gap-4 relative z-10 w-full md:w-[90%]">
-<div class="price-box rounded-xl p-4 flex justify-between items-center shadow-neon cursor-default group">
-<div class="flex items-center gap-4">
-<div class="w-8 h-8 rounded-full bg-magic-700/50 flex items-center justify-center border border-magic-400/50 group-hover:border-magic-200 transition-colors">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 2L17 8L12 22L7 8L12 2Z" fill="#fbcfe8" stroke="#fce7f3" stroke-width="1.5" stroke-linejoin="round"/>
-</svg>
+<script>
+// Particles Effect (Pink & Purple Accent)
+const P = document.getElementById('pts');
+['✦', '★', '✨', '✧', '★'].forEach(e => {
+for (let j = 0; j < 3; j++) {
+const d = document.createElement('div');
+d.className = 'pt'; d.textContent = e;
+d.style.cssText = `left:${Math.random()*100}vw;font-size:${8+Math.random()*6}px;color:${'#ff4aa2,#ff7ebb,#ba8baf'.split(',')[Math.floor(Math.random()*3)]};animation-duration:${10+Math.random()*15}s;animation-delay:${-Math.random()*25}s;`;
+P.appendChild(d);
+}
+});
+// --- TAB SWITCH LOGIC ---
+function switchTab(tabId) {
+document.getElementById('btn-info').classList.remove('active');
+document.getElementById('btn-products').classList.remove('active');
+document.getElementById(`btn-${tabId}`).classList.add('active');
+document.getElementById('tab-info').classList.remove('active');
+document.getElementById('tab-products').classList.remove('active');
+document.getElementById(`tab-${tabId}`).classList.add('active');
+}
+// --- PRODUCT DATA (ปรับตัวอย่างเป็นประเภทบริการของร้านคุณเพื่อความสมจริง แต่ใช้โครงสร้างเดิม) ---
+const products = [
+{ id: 'p1', cat: 'ออกแบบโลโก้ (Logo)', name: 'โลโก้ มินิมอล', desc: 'แก้ไขได้ 2 ครั้ง ส่งไฟล์ PNG/JPG', price: 290, icon: '🎨' },
+{ id: 'p2', cat: 'ออกแบบโลโก้ (Logo)', name: 'โลโก้ การ์ตูน/น่ารัก', desc: 'แก้ไขได้ 3 ครั้ง พร้อมไฟล์เวกเตอร์', price: 450, icon: '🐱' },
+{ id: 'p3', cat: 'ป้ายลายน้ำ & ป้ายบัญชี', name: 'ลายน้ำพ่อค้า-แม่ค้า', desc: 'ป้ายชื่อร้านพื้นหลังใส', price: 99, icon: '💧' },
+{ id: 'p4', cat: 'ป้ายลายน้ำ & ป้ายบัญชี', name: 'ป้ายบัญชีธนาคาร', desc: 'ตกแต่งธีมตามสั่ง สวยงามสแกนง่าย', price: 150, icon: '💳' },
+{ id: 'p5', cat: 'ชีตสรุป & คิวชีต', name: 'คิวชีตจัดตารางงาน', desc: 'สำหรับพ่อค้าแม่ค้าคิวแน่น', price: 190, icon: '📅' },
+{ id: 'p6', cat: 'ชีตสรุป & คิวชีต', name: 'ชีตรายรับ - รายจ่าย', desc: 'ไฟล์สำเร็จรูป คำนวณอัตโนมัติ', price: 250, icon: '📊' }
+];
+let cart = [];
+// Render Grid
+function renderProducts() {
+const grid = document.getElementById('productGrid');
+let currentCat = '';
+let html = '';
+products.forEach(p => {
+if (p.cat !== currentCat) {
+html += `<div class="cat-divider"><span>${p.cat}</span></div>`;
+currentCat = p.cat;
+}
+html += `
+<div class="item-card" id="card-${p.id}" onclick="toggleItem('${p.id}')">
+<div class="check-circle"></div>
+<div class="card-icon">${p.icon}</div>
+<div class="card-title">${p.name}</div>
+<div class="card-desc">${p.desc}</div>
+<div class="card-price">฿${p.price}</div>
 </div>
-<span class="text-xl font-medium tracking-wide text-magic-100 group-hover:text-white transition-colors">60 หยก</span>
+`;
+});
+grid.innerHTML = html;
+}
+// Toggle Selection
+function toggleItem(id) {
+const card = document.getElementById(`card-${id}`);
+const product = products.find(p => p.id === id);
+const index = cart.findIndex(item => item.id === id);
+if (index > -1) {
+cart.splice(index, 1);
+card.classList.remove('selected');
+} else {
+cart.push(product);
+card.classList.add('selected');
+}
+updateBottomBar();
+}
+// Update Bottom Bar
+function updateBottomBar() {
+const bar = document.getElementById('bottomBar');
+if (cart.length > 0) {
+bar.classList.add('active');
+document.getElementById('cartCount').innerText = `เลือก ${cart.length} รายการ`;
+document.getElementById('cartTotal').innerText = cart.reduce((sum, item) => sum + item.price, 0);
+} else {
+bar.classList.remove('active');
+closeSummary();
+}
+}
+// Open Summary Modal
+function openSummary() {
+if(cart.length === 0) return;
+const listEl = document.getElementById('modalItemsList');
+let html = '';
+let total = 0;
+cart.forEach(item => {
+html += `
+<div class="modal-item">
+<div class="modal-item-name">• ${item.name} <br><span style="font-size:11px; color:var(--text-muted)">${item.desc}</span></div>
+<div class="modal-item-price">฿${item.price}</div>
 </div>
-<span class="text-2xl font-bold text-white text-glow">35 THB</span>
-</div>
-<div class="price-box rounded-xl p-4 flex justify-between items-center shadow-neon cursor-default group">
-<div class="flex items-center gap-4">
-<div class="w-8 h-8 rounded-full bg-magic-700/50 flex items-center justify-center border border-magic-400/50 group-hover:border-magic-200 transition-colors">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 2L17 8L12 22L7 8L12 2Z" fill="#fbcfe8" stroke="#fce7f3" stroke-width="1.5" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="text-xl font-medium tracking-wide text-magic-100 group-hover:text-white transition-colors">330 หยก</span>
-</div>
-<span class="text-2xl font-bold text-white text-glow">150 THB</span>
-</div>
-<div class="price-box rounded-xl p-4 flex justify-between items-center shadow-neon cursor-default group">
-<div class="flex items-center gap-4">
-<div class="w-8 h-8 rounded-full bg-magic-700/50 flex items-center justify-center border border-magic-400/50 group-hover:border-magic-200 transition-colors">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 2L17 8L12 22L7 8L12 2Z" fill="#fbcfe8" stroke="#fce7f3" stroke-width="1.5" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="text-xl font-medium tracking-wide text-magic-100 group-hover:text-white transition-colors">1100 หยก</span>
-</div>
-<span class="text-2xl font-bold text-white text-glow">450 THB</span>
-</div>
-<div class="price-box rounded-xl p-4 flex justify-between items-center shadow-neon cursor-default group">
-<div class="flex items-center gap-4">
-<div class="w-8 h-8 rounded-full bg-magic-700/50 flex items-center justify-center border border-magic-400/50 group-hover:border-magic-200 transition-colors">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 2L17 8L12 22L7 8L12 2Z" fill="#fbcfe8" stroke="#fce7f3" stroke-width="1.5" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="text-xl font-medium tracking-wide text-magic-100 group-hover:text-white transition-colors">2268 หยก</span>
-</div>
-<span class="text-2xl font-bold text-white text-glow">885 THB</span>
-</div>
-<div class="price-box rounded-xl p-4 flex justify-between items-center shadow-neon cursor-default group">
-<div class="flex items-center gap-4">
-<div class="w-8 h-8 rounded-full bg-magic-700/50 flex items-center justify-center border border-magic-400/50 group-hover:border-magic-200 transition-colors">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 2L17 8L12 22L7 8L12 2Z" fill="#fbcfe8" stroke="#fce7f3" stroke-width="1.5" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="text-xl font-medium tracking-wide text-magic-100 group-hover:text-white transition-colors">3038 หยก</span>
-</div>
-<span class="text-2xl font-bold text-white text-glow">1455 THB</span>
-</div>
-<div class="price-box rounded-xl p-4 flex justify-between items-center shadow-neon cursor-default group">
-<div class="flex items-center gap-4">
-<div class="w-8 h-8 rounded-full bg-magic-700/50 flex items-center justify-center border border-magic-400/50 group-hover:border-magic-200 transition-colors">
-<svg width="16" height="16" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M12 2L17 8L12 22L7 8L12 2Z" fill="#fbcfe8" stroke="#fce7f3" stroke-width="1.5" stroke-linejoin="round"/>
-</svg>
-</div>
-<span class="text-xl font-medium tracking-wide text-magic-100 group-hover:text-white transition-colors">7776 หยก</span>
-</div>
-<span class="text-2xl font-bold text-white text-glow">2780 THB</span>
-</div>
-<div class="w-full h-px bg-gradient-to-r from-transparent via-magic-400/50 to-transparent my-2"></div>
-<div class="price-box rounded-xl p-4 flex justify-between items-center shadow-neon cursor-default group">
-<div class="flex items-center gap-4">
-<div class="w-8 h-8 rounded-full bg-magic-700/50 flex items-center justify-center border border-magic-400/50 group-hover:border-magic-200 transition-colors">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fce7f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<rect x="3" y="11" width="18" height="10" rx="2" ry="2"></rect>
-<path d="M7 11V7a5 5 0 0110 0v4"></path>
-</svg>
-</div>
-<span class="text-lg md:text-xl font-medium tracking-wide text-magic-100 group-hover:text-white transition-colors">Monthly pass</span>
-</div>
-<span class="text-2xl font-bold text-white text-glow">170 THB</span>
-</div>
-<div class="price-box rounded-xl p-4 flex justify-between items-center shadow-neon cursor-default group">
-<div class="flex items-center gap-4">
-<div class="w-8 h-8 rounded-full bg-magic-700/50 flex items-center justify-center border border-magic-400/50 group-hover:border-magic-200 transition-colors">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fce7f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
-</svg>
-</div>
-<span class="text-lg md:text-xl font-medium tracking-wide text-magic-100 group-hover:text-white transition-colors">Basic battle pass</span>
-</div>
-<span class="text-2xl font-bold text-white text-glow">260 THB</span>
-</div>
-<div class="price-box rounded-xl p-4 flex justify-between items-center shadow-neon cursor-default group">
-<div class="flex items-center gap-4">
-<div class="w-8 h-8 rounded-full bg-magic-700/50 flex items-center justify-center border border-magic-400/50 group-hover:border-magic-200 transition-colors">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fce7f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-</svg>
-</div>
-<span class="text-lg md:text-xl font-medium tracking-wide text-magic-100 group-hover:text-white transition-colors">Battle pass upgrade</span>
-</div>
-<span class="text-2xl font-bold text-white text-glow">410 THB</span>
-</div>
-<div class="price-box rounded-xl p-4 flex justify-between items-center shadow-neon cursor-default group">
-<div class="flex items-center gap-4">
-<div class="w-8 h-8 rounded-full bg-magic-700/50 flex items-center justify-center border border-magic-400/50 group-hover:border-magic-200 transition-colors">
-<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fce7f3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M5 3v4M19 3v4M5 21v-4M19 21v-4M9 3h6M9 21h6M12 7v10M8 12h8"></path>
-</svg>
-</div>
-<span class="text-lg md:text-xl font-medium tracking-wide text-magic-100 group-hover:text-white transition-colors">Advanced battle pass</span>
-</div>
-<span class="text-2xl font-bold text-white text-glow">620 THB</span>
-</div>
-</div>
-</section>
-
-<section class="w-full lg:w-[45%] bg-gradient-to-br from-magic-800/80 to-magic-900/95 p-6 md:p-10 lg:p-12 border-t lg:border-t-0 lg:border-l border-magic-400/20 flex flex-col justify-between relative overflow-hidden">
-<div class="absolute inset-0 flex items-center justify-center opacity-10 pointer-events-none floating z-0">
-<svg width="400" height="400" viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M100 10L115 80L185 95L115 110L100 180L85 110L15 95L85 80L100 10Z" fill="#f472b6"/>
-<path d="M100 30L108 85L165 95L108 105L100 160L92 105L35 95L92 85L100 30Z" fill="#fce7f3"/>
-<circle cx="100" cy="95" r="15" fill="#ffffff" filter="blur(4px)"/>
-</svg>
-</div>
-<div class="relative z-10 flex flex-col h-full gap-8">
-<div class="bg-magic-900/60 p-5 rounded-2xl border border-magic-500/30 backdrop-blur-sm">
-<h3 class="text-magic-300 font-semibold text-lg mb-2 flex items-center gap-2">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<circle cx="12" cy="12" r="10"></circle>
-<line x1="12" y1="8" x2="12" y2="12"></line>
-<line x1="12" y1="16" x2="12.01" y2="16"></line>
-</svg>
-หมายเหตุ
-</h3>
-<p class="text-sm text-gray-300 leading-relaxed">
-เติมผ่านระบบไอดี แจ้งผิดไม่รับผิดชอบทุกกรณีค่ะ <br>
-<span class="text-magic-200">หากดูไอดีไม่เป็น แจ้งก่อนได้</span>
-</p>
-</div>
-<div class="flex-1">
-<h3 class="text-xl font-semibold text-white mb-6 border-b border-magic-500/30 pb-2 flex items-center gap-2">
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fbcfe8" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
-<polyline points="14 2 14 8 20 8"></polyline>
-<line x1="16" y1="13" x2="8" y2="13"></line>
-<line x1="16" y1="17" x2="8" y2="17"></line>
-<polyline points="10 9 9 9 8 9"></polyline>
-</svg>
-ขั้นตอนการสั่ง
-</h3>
-<ul class="space-y-4 text-sm text-gray-200">
-<li class="flex items-start gap-3">
-<div class="min-w-[24px] h-[24px] rounded-full bg-magic-600/50 border border-magic-400 flex items-center justify-center text-xs font-bold text-white mt-0.5">1</div>
-<p>เลือกแพ็คที่สนใจ สามารถบวกกันได้</p>
-</li>
-<li class="flex items-start gap-3">
-<div class="min-w-[24px] h-[24px] rounded-full bg-magic-600/50 border border-magic-400 flex items-center justify-center text-xs font-bold text-white mt-0.5">2</div>
-<p>เค้าจะทำการรวมยอดแล้วแจ้งราคา</p>
-</li>
-<li class="flex items-start gap-3">
-<div class="min-w-[24px] h-[24px] rounded-full bg-magic-600/50 border border-magic-400 flex items-center justify-center text-xs font-bold text-white mt-0.5">3</div>
-<p>โอนเงินตามจำนวนที่เค้าแจ้งไปและอย่าลืมโน้ตสลิปน้า</p>
-</li>
-<li class="flex items-start gap-3">
-<div class="min-w-[24px] h-[24px] rounded-full bg-magic-600/50 border border-magic-400 flex items-center justify-center text-xs font-bold text-white mt-0.5">4</div>
-<p>แนบสลิปและแจ้งไอดีได้เลย</p>
-</li>
-<li class="flex items-start gap-3">
-<div class="min-w-[24px] h-[24px] rounded-full bg-magic-600/50 border border-magic-400 flex items-center justify-center text-xs font-bold text-white mt-0.5">5</div>
-<p class="leading-relaxed">รอเติม 5-10 นาที ห้ามเร่ง ห้ามรัวแชท <br>
-<span class="text-magic-300">วันพฤหัสเติมช้า 1-5 ชม. รอไม่ไหวแนะนำเติมวันอื่นค่ะ</span>
-</p>
-</li>
-<li class="flex items-start gap-3">
-<div class="min-w-[24px] h-[24px] rounded-full bg-magic-600/50 border border-magic-400 flex items-center justify-center text-xs font-bold text-white mt-0.5">6</div>
-<p>หลังจากเติมแล้วและเข้าแล้ว แคปมาเพื่อเป็นหลักฐาน และรับบัตรสะสมแต้ม เพื่อแลกรับนฟ. 1 วันได้เลยค่ะ</p>
-</li>
-</ul>
-</div>
-<div class="mt-6 pt-6 border-t border-magic-500/20 text-center">
-<p class="text-gray-400 text-sm mb-2">ช่องทางติดต่อ</p>
-<a href="#" class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-magic-600/30 border border-magic-400/50 hover:bg-magic-500/40 hover:border-magic-300 transition-all text-white font-medium text-glow">
-<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-<path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path>
-</svg>
-coopercliton
-</a>
-</div>
-</div>
-</section>
-</main>
+`;
+total += item.price;
+});
+listEl.innerHTML = html;
+document.getElementById('modalTotalPrice').innerText = total;
+document.getElementById('summaryModal').classList.add('show');
+}
+function closeSummary() {
+document.getElementById('summaryModal').classList.remove('show');
+}
+// Checkout (Copy Text & Redirect Immediate)
+function checkout() {
+let total = 0;
+let text = "สรุปรายการสั่งซื้อ [JaoMeowStore]\n\n";
+cart.forEach(item => {
+text += `สินค้า: ${item.cat} - ${item.name}\n`;
+text += `รายละเอียด: ${item.desc}\n`;
+text += `ราคา: ${item.price} บาท\n\n`;
+total += item.price;
+});
+text += "--------------------\n";
+text += `ยอดที่ต้องชำระทั้งหมด: ${total} บาท\n\n`;
+text += "ขอบคุณที่ไว้วางใจร้านเจ้าเหมียวค่ะ\n";
+text += "กรุณารอแอดมินตอบกลับสักครู่นะคะ";
+const tempInput = document.createElement("textarea");
+tempInput.value = text;
+document.body.appendChild(tempInput);
+tempInput.select();
+try { document.execCommand("copy"); } catch (err) {}
+document.body.removeChild(tempInput);
+closeSummary();
+window.location.href = "https://lin.ee/Vt7DR6S";
+}
+// Init
+renderProducts();
+</script>
 </body>
 </html>
