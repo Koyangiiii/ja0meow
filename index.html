@@ -326,20 +326,23 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 <div class="hero-title">JaoMeowStore</div>
 <div class="hero-sub">เจ้าเหมียวรับทำ ป้าย โลโก้ ลายน้ำ คิวชีต ชีตรายรับ - รายจ่าย</div>
 <div class="tab-container">
-<button class="tab-btn" id="btn-info" onclick="switchTab('info')">รายละเอียด</button>
-<button class="tab-btn active" id="btn-products" onclick="switchTab('products')">กลุ่ม</button>
+<!-- ปรับ class active มาอยู่ที่ปุ่มรายละเอียดเพื่อให้สอดคล้องกับหน้าแรกเริ่มต้น -->
+<button class="tab-btn active" id="btn-info" onclick="switchTab('info')">รายละเอียด</button>
+<button class="tab-btn" id="btn-products" onclick="switchTab('products')">กลุ่ม</button>
 </div>
 </div>
 <div class="content">
-<div id="tab-info" class="tab-content">
+<!-- ปรับ class active มาไว้ที่ tab-info เพื่อให้หน้าแรกเริ่มต้นเป็นหน้ารายละเอียด -->
+<div id="tab-info" class="tab-content active">
 <!-- เพิ่มหัวข้อลอยให้จิ้มเลือกได้ในหน้ารายละเอียด -->
 <div class="floating-topics-container">
 <div class="topic-pill" onclick="selectTopic('สั่งงานป้าย')">✨ สั่งงานป้าย</div>
 <div class="topic-pill" onclick="selectTopic('google sheet')">📊 google sheet</div>
 </div>
 <div class="info-card">
-<h3 class="info-card-title">Showcase & Contact</h3>
-<p class="info-card-sub">ช่องทางการติดต่อและรายละเอียดร้านค้า</p>
+<h3 class="info-card-title" id="infoCardTitle">Showcase & Contact</h3>
+<p class="info-card-sub" id="infoCardSub">ช่องทางการติดต่อและรายละเอียดร้านค้า</p>
+<div id="infoCardDetails">
 <div class="info-row">
 <span>Line</span>
 <span>@997pfoig</span>
@@ -365,7 +368,8 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 </div>
 </div>
 </div>
-<div id="tab-products" class="tab-content active">
+</div>
+<div id="tab-products" class="tab-content">
 <div class="sh">
 <div class="sh-line"></div>
 <h2>หมวดหมู่สินค้า / บริการ</h2>
@@ -419,9 +423,55 @@ document.getElementById('tab-info').classList.remove('active');
 document.getElementById('tab-products').classList.remove('active');
 document.getElementById(`tab-${tabId}`).classList.add('active');
 }
-// ฟังก์ชันสำหรับจัดการเมื่อจิ้มเลือกหัวข้อลอย
+// ฟังก์ชันสำหรับจัดการเมื่อจิ้มเลือกหัวข้อลอย เพื่อเปลี่ยนส่วนข้อมูลการสั่งงานด้านล่างภายในหน้ารายละเอียด
 function selectTopic(topicName) {
-alert('คุณเลือกหัวข้อ: ' + topicName);
+const cardTitle = document.getElementById('infoCardTitle');
+const cardSub = document.getElementById('infoCardSub');
+const cardDetails = document.getElementById('infoCardDetails');
+
+if (topicName === 'สั่งงานป้าย') {
+cardTitle.innerText = "📋 ข้อมูลการสั่งงานป้าย";
+cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งออกแบบป้าย";
+cardDetails.innerHTML = `
+<div class="info-row">
+<span>1. แจ้งประเภทป้าย</span>
+<span>ป้ายบัญชี / ลายน้ำ / โลโก้</span>
+</div>
+<div class="info-row">
+<span>2. ระบุโทนสี & แนวทาง</span>
+<span>หวาน / มินิมอล / หรูหรา</span>
+</div>
+<div class="info-row">
+<span>3. ส่งข้อความ/รูปภาพ</span>
+<span>ส่งข้อความที่จะใส่ในป้ายทาง LINE</span>
+</div>
+<div class="info-row">
+<span>ระยะเวลาผลิต</span>
+<span>1-2 วันหลังชำระเงิน</span>
+</div>
+`;
+} else if (topicName === 'google sheet') {
+cardTitle.innerText = "📊 ข้อมูลการสั่งงาน Google Sheet";
+cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งทำชีตระบบงาน";
+cardDetails.innerHTML = `
+<div class="info-row">
+<span>1. ระบุประเภทระบบ</span>
+<span>รายรับ-รายจ่าย / คิวงาน / สต็อก</span>
+</div>
+<div class="info-row">
+<span>2. แจ้งฟังก์ชันที่ต้องการ</span>
+<span>คำนวณอัตโนมัติ / สรุปกราฟ</span>
+</div>
+<div class="info-row">
+<span>3. รูปแบบการส่งมอบ</span>
+<span>แชร์สิทธิ์ลิงก์ไฟล์ Google Sheet</span>
+</div>
+<div class="info-row">
+<span>การดูแลหลังการขาย</span>
+<span>แนะนำวิธีใช้งานและแก้ไขสูตรฟรี 7 วัน</span>
+</div>
+`;
+}
 }
 // --- PRODUCT DATA (ปรับตัวอย่างเป็นประเภทบริการของร้านคุณเพื่อความสมจริง แต่ใช้โครงสร้างเดิม) ---
 const products = [
