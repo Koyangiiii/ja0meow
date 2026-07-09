@@ -172,6 +172,19 @@ font-size: 12px;
 color: var(--text-muted);
 background: rgba(255,255,255,0.02);
 }
+
+/* สไตล์สำหรับหัวข้อลอย (Floating Topics) */
+.floating-topics-container {
+display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;
+}
+.topic-pill {
+background: rgba(255, 74, 162, 0.1); border: 1px solid var(--primary);
+color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 13px;
+font-weight: 500; cursor: pointer; transition: all 0.2s ease;
+box-shadow: 0 4px 10px rgba(255, 74, 162, 0.1);
+}
+.topic-pill:active { transform: scale(0.95); background: var(--primary); }
+
 /*
 --- PRODUCTS TAB ---
 */
@@ -319,6 +332,11 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 </div>
 <div class="content">
 <div id="tab-info" class="tab-content">
+<!-- เพิ่มหัวข้อลอยให้จิ้มเลือกได้ในหน้ารายละเอียด -->
+<div class="floating-topics-container">
+<div class="topic-pill" onclick="selectTopic('สั่งงานป้าย')">✨ สั่งงานป้าย</div>
+<div class="topic-pill" onclick="selectTopic('google sheet')">📊 google sheet</div>
+</div>
 <div class="info-card">
 <h3 class="info-card-title">Showcase & Contact</h3>
 <p class="info-card-sub">ช่องทางการติดต่อและรายละเอียดร้านค้า</p>
@@ -400,6 +418,10 @@ document.getElementById(`btn-${tabId}`).classList.add('active');
 document.getElementById('tab-info').classList.remove('active');
 document.getElementById('tab-products').classList.remove('active');
 document.getElementById(`tab-${tabId}`).classList.add('active');
+}
+// ฟังก์ชันสำหรับจัดการเมื่อจิ้มเลือกหัวข้อลอย
+function selectTopic(topicName) {
+alert('คุณเลือกหัวข้อ: ' + topicName);
 }
 // --- PRODUCT DATA (ปรับตัวอย่างเป็นประเภทบริการของร้านคุณเพื่อความสมจริง แต่ใช้โครงสร้างเดิม) ---
 const products = [
