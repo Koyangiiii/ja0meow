@@ -96,7 +96,7 @@ background: transparent; transition: all 0.2s; margin-bottom: 10px; cursor: poin
 }
 .queue-btn-dashed:hover { background: rgba(255,74,162,0.1); }
 
-/* แถบปุ่มสลับหน้าแบบแนวยาว เล็กกะทัดรัด */
+/* แถบปุ่มสลับหน้าแบบแนวยาว เล็กกะทัดรัด (ปรับความกว้างเพื่อรองรับ 3 แท็บ) */
 .tab-container {
 position: absolute;
 bottom: -20px;
@@ -107,7 +107,7 @@ background: var(--bg-card);
 border: 1px solid var(--border-color);
 border-radius: 30px;
 padding: 4px;
-width: 260px;
+width: 320px;
 z-index: 10;
 box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
@@ -370,12 +370,29 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 <div class="hero-title">JaoMeowStore</div>
 <div class="hero-sub">เจ้าเหมียวรับทำ ป้าย โลโก้ ลายน้ำ คิวชีต ชีตรายรับ - รายจ่าย</div>
 <div class="tab-container">
-<button class="tab-btn active" id="btn-info" onclick="switchTab('info')">รายละเอียด</button>
+<button class="tab-btn active" id="btn-home" onclick="switchTab('home')">หน้าหลัก</button>
+<button class="tab-btn" id="btn-info" onclick="switchTab('info')">รายละเอียด</button>
 <button class="tab-btn" id="btn-products" onclick="switchTab('products')">กลุ่ม</button>
 </div>
 </div>
 <div class="content">
-<div id="tab-info" class="tab-content active">
+<!-- หน้าหลัก (เพิ่มใหม่เป็นหน้าแรก) -->
+<div id="tab-home" class="tab-content active">
+<div class="info-card">
+<h3 class="info-card-title">ยินดีต้อนรับสู่ JaoMeowStore 🐱✨</h3>
+<p class="info-card-sub">ศูนย์รวมงานออกแบบและระบบจัดการร้านค้าครบวงจร</p>
+<div style="text-align: left; font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.9); margin-bottom: 20px;">
+<p style="margin-bottom: 10px;">🎨 <b>งานดีไซน์คุณภาพ:</b> รับออกแบบโลโก้ ป้ายบัญชี ลายน้ำ สวยงามโดดเด่นตามสไตล์ของคุณ</p>
+<p style="margin-bottom: 10px;">📊 <b>ระบบจัดการร้านค้า:</b> Google Sheet สำเร็จรูปสำหรับจัดการคิวงาน และสรุปรายรับ-รายจ่าย คำนวณอัตโนมัติ</p>
+<p>⚡ <b>บริการรวดเร็ว:</b> การันตีงานด่วน ทันใจ ใส่ใจทุกรายละเอียด สนใจรับบริการชิ้นไหนเลือกดูที่แท็บด้านบนได้เลยค่ะ</p>
+</div>
+<div class="review-placeholder" style="border-style: solid; background: rgba(255, 74, 162, 0.05); color: #fff; cursor: pointer;" onclick="switchTab('products')">
+👉 คลิกที่นี่เพื่อดูรายการสินค้าทั้งหมด ✨
+</div>
+</div>
+</div>
+
+<div id="tab-info" class="tab-content">
 <div class="floating-topics-container">
 <div class="topic-pill" onclick="selectTopic('สั่งงานป้าย')">✨ สั่งงานป้าย</div>
 <div class="topic-pill" onclick="selectTopic('google sheet')">📊 google sheet</div>
@@ -458,9 +475,11 @@ P.appendChild(d);
 });
 // --- TAB SWITCH LOGIC ---
 function switchTab(tabId) {
+document.getElementById('btn-home').classList.remove('active');
 document.getElementById('btn-info').classList.remove('active');
 document.getElementById('btn-products').classList.remove('active');
 document.getElementById(`btn-${tabId}`).classList.add('active');
+document.getElementById('tab-home').classList.remove('active');
 document.getElementById('tab-info').classList.remove('active');
 document.getElementById('tab-products').classList.remove('active');
 document.getElementById(`tab-${tabId}`).classList.add('active');
