@@ -21,7 +21,8 @@ body {
 font-family: 'Kanit', sans-serif;
 background: var(--bg-main); color: #fff;
 overflow-x: hidden;
-padding-bottom: 180px; /* เพิ่มพื้นที่ด้านล่างเพื่อรองรับกรอบลอยและตะกร้าสินค้าไม่ให้ทับซ้อนข้อมูล */
+padding-top: 55px; /* เพิ่มพื้นที่ด้านบนเพื่อรองรับแถบติดต่อไปไว้ด้านบนสุด ไม่ให้ทับซ้อนข้อมูล */
+padding-bottom: 120px; /* ลดพื้นที่ด้านล่างเนื่องจากย้ายแถบติดต่อไปไว้ข้างบนแล้ว */
 }
 /* Background Glow Effects */
 .bg-glow-1 {
@@ -237,32 +238,43 @@ padding: 4px 10px; border-radius: 8px;
 .cat-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255, 74, 162, 0.2); }
 
 /*
---- FLOATING BOTTOM CONTACT BAR (กรอบลอยช่องทางติดต่อ - อยู่ท้ายสุดของหน้าจอถาวร) ---
+--- FLOATING TOP CONTACT BAR (ย้ายมาไว้ด้านบนสุดของหน้าจอถาวร และปรับเอฟเฟกต์การชี้เห็นชัดเจน) ---
 */
 .floating-contact-bar {
-position: fixed; bottom: 0; left: 0; right: 0;
+position: fixed; top: 0; left: 0; right: 0;
 background: rgba(22, 18, 26, 0.98); backdrop-filter: blur(10px);
-border-top: 1px solid var(--border-color); padding: 12px 20px;
-display: flex; justify-content: center; gap: 20px; align-items: center;
-z-index: 1001; box-shadow: 0 -5px 20px rgba(0,0,0,0.6);
+border-bottom: 1px solid var(--border-color); padding: 12px 20px;
+display: flex; justify-content: center; gap: 12px; align-items: center;
+z-index: 1001; box-shadow: 0 5px 20px rgba(0,0,0,0.6);
 }
 .contact-item {
 display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500;
-color: #fff; text-decoration: none; transition: color 0.2s;
+color: rgba(255, 255, 255, 0.8); text-decoration: none; 
+padding: 6px 12px; border-radius: 20px;
+transition: all 0.25s ease;
 }
-.contact-item:active { color: var(--primary); }
-.contact-icon { font-size: 16px; }
+/* เพิ่มเอฟเฟกต์เมื่อเมาส์เลื่อนผ่าน (Hover) ให้เห็นได้ชัดเจนว่าผ่านตรงไหน */
+.contact-item:hover { 
+color: var(--primary); 
+background: rgba(255, 74, 162, 0.12);
+transform: translateY(-1px);
+text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
+}
+.contact-item:active { color: var(--secondary); background: rgba(255, 74, 162, 0.2); }
+.contact-icon { font-size: 16px; transition: transform 0.25s ease; }
+.contact-item:hover .contact-icon { transform: scale(1.15); }
 
 /*
---- FLOATING BOTTOM BAR (ปรับตำแหน่งปุ่มสั่งซื้อให้ขยับขึ้นมาด้านบนแถบติดต่อลอย) ---
+--- FLOATING BOTTOM BAR (ปรับตำแหน่งปุ่มสั่งซื้ออยู่ด้านล่างปกติ) ---
 */
 .bottom-bar {
-position: fixed; bottom: 44px; left: 0; right: 0;
+position: fixed; bottom: 15px; left: 0; right: 0;
 background: rgba(22, 18, 26, 0.95); backdrop-filter: blur(15px);
-border-top: 1px solid var(--primary); padding: 15px 24px;
+border: 1px solid var(--primary); padding: 15px 24px;
 display: flex; justify-content: space-between; align-items: center;
 transform: translateY(150%); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 box-shadow: 0 -10px 30px rgba(0,0,0,0.5); z-index: 1000;
+border-radius: 20px; margin: 0 15px;
 }
 .bottom-bar.active { transform: translateY(0); }
 .bb-info { display: flex; flex-direction: column; }
@@ -327,6 +339,20 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 <div class="bg-glow-1"></div>
 <div class="bg-glow-2"></div>
 <div id="pts"></div>
+
+<!-- กรอบลอยช่องทางการติดต่อ ย้ายมาล็อกตำแหน่งไว้ด้านบนสุดถาวรและปรับแต่ง Hover Effect ตามคำสั่ง -->
+<div class="floating-contact-bar">
+    <a href="https://lin.ee/Vt7DR6S" class="contact-item" target="_blank">
+        <span class="contact-icon">💬</span><span>Line: @997pfoig</span>
+    </a>
+    <a href="https://facebook.com/YOUR_PAGE_URL" class="contact-item" target="_blank">
+        <span class="contact-icon">👥</span><span>Facebook</span>
+    </a>
+    <a href="https://instagram.com/YOUR_IG_URL" class="contact-item" target="_blank">
+        <span class="contact-icon">📸</span><span>IG</span>
+    </a>
+</div>
+
 <div class="hero">
 <div class="badges-container">
 <span class="badge-item"></span>
@@ -392,21 +418,6 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 <div class="grid-container" id="productGrid">
 </div>
 </div>
-</div>
-
-<!-- กรอบลอยช่องทางการติดต่อ ล็อกตำแหน่งไว้ท้ายสุดของหน้าจอถาวรตามคำสั่ง -->
-<div class="floating-contact-bar">
-    <a href="https://lin.ee/Vt7DR6S" class="contact-item" target="_blank">
-        <span class="contact-icon">💬</span><span>Line: @997pfoig</span>
-    </a>
-    <!-- ใส่ลิงก์เพจ Facebook ตรงช่อง href -->
-    <a href="https://facebook.com/YOUR_PAGE_URL" class="contact-item" target="_blank">
-        <span class="contact-icon">👥</span><span>Facebook</span>
-    </a>
-    <!-- ใส่ลิงก์ IG ตรงช่อง href -->
-    <a href="https://instagram.com/YOUR_IG_URL" class="contact-item" target="_blank">
-        <span class="contact-icon">📸</span><span>IG</span>
-    </a>
 </div>
 
 <div class="bottom-bar" id="bottomBar">
