@@ -501,6 +501,11 @@ document.getElementById('tab-home').classList.remove('active');
 document.getElementById('tab-info').classList.remove('active');
 document.getElementById('tab-products').classList.remove('active');
 document.getElementById(`tab-${tabId}`).classList.add('active');
+
+/* แก้ไขจุดนี้: เมื่อกดสลับมาที่หน้ารายละเอียด (info) ให้แสดงข้อมูลสั่งงานป้ายทันที */
+if (tabId === 'info') {
+selectTopic('สั่งงานป้าย');
+}
 }
 // ฟังก์ชันสำหรับจัดการเมื่อจิ้มเลือกหัวข้อลอย เพื่อเปลี่ยนส่วนข้อมูลการสั่งงานด้านล่างภายในหน้ารายละเอียด
 function selectTopic(topicName) {
