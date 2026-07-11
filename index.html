@@ -8,10 +8,11 @@
 <style>
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 :root {
---primary: #ff4aa2;
---secondary: #ff7ebb;
---bg-main: #0a080d;
---bg-card: #16121a;
+/* เปลี่ยนโทนสีเป็น ดำ + ชมพู ตามบรีฟ */
+--primary: #ff4aa2; /* ชมพูเด่น */
+--secondary: #ff7ebb; /* ชมพูอ่อน/ฟ้าสว่างเดิมปรับเป็นชมพู */
+--bg-main: #0a080d; /* พื้นหลังหน้าเว็บ ดำลึก */
+--bg-card: #16121a; /* พื้นหลังการ์ด ดำอมม่วงชมพู */
 --border-color: rgba(255, 74, 162, 0.25);
 --text-muted: #ba8baf;
 }
@@ -20,9 +21,10 @@ body {
 font-family: 'Kanit', sans-serif;
 background: var(--bg-main); color: #fff;
 overflow-x: hidden;
-padding-top: 55px;
-padding-bottom: 120px;
+padding-top: 55px; /* เพิ่มพื้นที่ด้านบนเพื่อรองรับแถบติดต่อไปไว้ด้านบนสุด ไม่ให้ทับซ้อนข้อมูล */
+padding-bottom: 120px; /* ลดพื้นที่ด้านล่างเนื่องจากย้ายแถบติดต่อไปไว้ข้างบนแล้ว */
 }
+/* Background Glow Effects */
 .bg-glow-1 {
 position: fixed; top: -100px; left: -100px; width: 300px; height: 300px;
 background: radial-gradient(circle, rgba(255,74,162,0.15) 0%, rgba(0,0,0,0) 70%);
@@ -33,6 +35,7 @@ position: fixed; bottom: 20%; right: -150px; width: 400px; height: 400px;
 background: radial-gradient(circle, rgba(255,74,162,0.15) 0%, rgba(0,0,0,0) 70%);
 z-index: -1; pointer-events: none;
 }
+/* Particles */
 #pts { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 .pt { position: absolute; animation: ptUp linear infinite; opacity: 0; }
 @keyframes ptUp {
@@ -41,7 +44,11 @@ z-index: -1; pointer-events: none;
 92% { opacity: 0.45; }
 100% { transform: translateY(-8vh) rotate(360deg); opacity: 0; }
 }
+/*
+--- HERO & TABS SECTION ---
+*/
 .hero {
+/* ปรับเป็นโทนสี ดำ + ชมพู ตามที่สั่ง */
 background: linear-gradient(135deg, rgba(22, 18, 26, 0.95) 0%, rgba(255, 74, 162, 0.15) 100%);
 padding: 40px 20px 65px;
 text-align: center;
@@ -50,6 +57,7 @@ border-bottom: 1px solid var(--border-color);
 margin-bottom: 40px;
 box-shadow: 0 4px 30px rgba(255, 74, 162, 0.1);
 }
+/* ปรับให้ชื่อร้านตัวหนาและใหญ่ขึ้นเล็กน้อย */
 .hero-title {
 font-family: 'Mitr', sans-serif;
 font-size: 38px; font-weight: 800; color: #fff;
@@ -61,6 +69,8 @@ font-size: 13px; color: rgba(255,255,255,0.85);
 margin-bottom: 15px;
 line-height: 1.4;
 }
+
+/* เพิ่ม CSS สำหรับส่วนประกอบสำคัญที่สั่งให้คงไว้ */
 .badges-container {
 display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;
 }
@@ -79,6 +89,7 @@ margin-bottom: 12px; border: 1px solid rgba(255,74,162,0.2);
 .status-dot { width: 6px; height: 6px; background: #00ff00; border-radius: 50%; animation: blink 1.5s infinite; }
 @keyframes blink { 0%, 100% { opacity: 0.3; } 50% { opacity: 1; } }
 
+/* ปรับปรุงขนาดการเช็คคิวให้ใหญ่ขึ้นและเด่นชัด */
 .queue-btn-dashed {
 display: block; width: 100%; padding: 14px; border: 2px dashed var(--primary);
 border-radius: 15px; font-size: 16px; font-weight: 600; color: #fff; text-decoration: none;
@@ -87,21 +98,42 @@ box-shadow: 0 0 15px rgba(255, 74, 162, 0.15); text-align: center;
 }
 .queue-btn-dashed:hover { background: rgba(255,74,162,0.18); transform: scale(1.02); }
 
+/* แถบปุ่มสลับหน้าแบบแนวยาว เล็กกะทัดรัด (ปรับความกว้างเพื่อรองรับ 3 แท็บ) */
 .tab-container {
-position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%);
-display: flex; background: var(--bg-card); border: 1px solid var(--border-color);
-border-radius: 30px; padding: 4px; width: 320px; z-index: 10;
+position: absolute;
+bottom: -20px;
+left: 50%;
+transform: translateX(-50%);
+display: flex;
+background: var(--bg-card);
+border: 1px solid var(--border-color);
+border-radius: 30px;
+padding: 4px;
+width: 320px;
+z-index: 10;
 box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
 .tab-btn {
-flex: 1; padding: 8px 0; border-radius: 25px; border: none; font-family: inherit;
-font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.3s ease;
-background: transparent; color: var(--text-muted);
+flex: 1;
+padding: 8px 0;
+border-radius: 25px;
+border: none;
+font-family: inherit;
+font-size: 13px;
+font-weight: 600;
+cursor: pointer;
+transition: all 0.3s ease;
+background: transparent;
+color: var(--text-muted);
 }
 .tab-btn.active {
 background: linear-gradient(135deg, var(--primary), var(--secondary));
-color: #fff; box-shadow: 0 2px 10px rgba(255, 74, 162, 0.3);
+color: #fff;
+box-shadow: 0 2px 10px rgba(255, 74, 162, 0.3);
 }
+/*
+--- CONTENT ---
+*/
 .content { max-width: 600px; margin: 0 auto; padding: 0 20px 50px; position: relative; z-index: 5; }
 .tab-content { display: none; animation: fadeIn 0.3s ease; }
 .tab-content.active { display: block; }
@@ -109,26 +141,45 @@ color: #fff; box-shadow: 0 2px 10px rgba(255, 74, 162, 0.3);
 from { opacity: 0; transform: translateY(10px); }
 to { opacity: 1; transform: translateY(0); }
 }
+/*
+--- INFO TAB ---
+*/
 .info-card {
-background: var(--bg-card); border: 1px solid var(--border-color);
-border-radius: 20px; padding: 30px 24px; text-align: center;
+background: var(--bg-card);
+border: 1px solid var(--border-color);
+border-radius: 20px;
+padding: 30px 24px;
+text-align: center;
 box-shadow: 0 8px 25px rgba(0,0,0,0.2);
 }
-.info-card-title { font-size: 18px; font-weight: 700; color: var(--secondary); margin-bottom: 4px; }
-.info-card-sub { font-size: 13px; color: var(--text-muted); margin-bottom: 24px; }
+.info-card-title {
+font-size: 18px; font-weight: 700; color: var(--secondary); margin-bottom: 4px;
+}
+.info-card-sub {
+font-size: 13px; color: var(--text-muted); margin-bottom: 24px;
+}
 .info-row {
 display: flex; justify-content: space-between; align-items: center;
-padding: 14px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); font-size: 14px;
+padding: 14px 0;
+border-bottom: 1px dashed rgba(255,255,255,0.1);
+font-size: 14px;
 }
 .info-row:last-of-type { border-bottom: none; margin-bottom: 20px; }
 .info-row span:first-child { color: var(--primary); font-weight: 600; }
 .info-row span:last-child { color: #fff; font-weight: 500; }
 .review-placeholder {
-border: 1.5px dashed rgba(255,255,255,0.15); border-radius: 12px;
-padding: 16px; font-size: 12px; color: var(--text-muted);
+border: 1.5px dashed rgba(255,255,255,0.15);
+border-radius: 12px;
+padding: 16px;
+font-size: 12px;
+color: var(--text-muted);
 background: rgba(255,255,255,0.02);
 }
-.floating-topics-container { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
+
+/* สไตล์สำหรับหัวข้อลอย (Floating Topics) */
+.floating-topics-container {
+display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;
+}
 .topic-pill {
 background: rgba(255, 74, 162, 0.1); border: 1px solid var(--primary);
 color: rgba(255, 255, 255, 0.7); padding: 8px 16px; border-radius: 20px; font-size: 13px;
@@ -136,10 +187,17 @@ font-weight: 500; cursor: pointer; transition: all 0.2s ease;
 box-shadow: 0 4px 10px rgba(255, 74, 162, 0.1);
 }
 .topic-pill:active { transform: scale(0.95); }
+/* สไตล์เพิ่มพิเศษเมื่อมีการกดเลือกหัวข้อย่อย */
 .topic-pill.active {
-background: var(--primary); color: #fff; border-color: var(--primary);
+background: var(--primary);
+color: #fff;
+border-color: var(--primary);
 box-shadow: 0 4px 12px rgba(255, 74, 162, 0.3);
 }
+
+/*
+--- PRODUCTS TAB ---
+*/
 .sh { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding: 0 5px; }
 .sh-line {
 width: 4px; height: 22px;
@@ -147,11 +205,15 @@ background: linear-gradient(180deg, var(--primary), var(--secondary));
 border-radius: 4px;
 }
 .sh h2 { font-size: 18px; font-weight: 700; color: #fff; }
-.grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+.grid-container {
+display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px;
+}
 .item-card {
 background: var(--bg-card); border: 1.5px solid rgba(255,255,255,0.08);
-padding: 16px; position: relative; cursor: pointer; transition: all 0.2s ease;
-display: flex; flex-direction: column; border-radius: 16px;
+border-radius: 166px; padding: 16px; position: relative;
+cursor: pointer; transition: all 0.2s ease;
+display: flex; flex-direction: column;
+border-radius: 16px;
 }
 .item-card:active { transform: scale(0.96); }
 .item-card.selected {
@@ -160,8 +222,10 @@ background: linear-gradient(145deg, rgba(255, 74, 162, 0.1) 0%, var(--bg-card) 1
 box-shadow: 0 0 15px rgba(255, 74, 162, 0.2);
 }
 .check-circle {
-position: absolute; top: 12px; right: 12px; width: 22px; height: 22px; border-radius: 50%;
-border: 2px solid rgba(255,255,255,0.15); display: flex; justify-content: center; align-items: center;
+position: absolute; top: 12px; right: 12px;
+width: 22px; height: 22px; border-radius: 50%;
+border: 2px solid rgba(255,255,255,0.15);
+display: flex; justify-content: center; align-items: center;
 transition: all 0.2s;
 }
 .item-card.selected .check-circle { background: var(--primary); border-color: var(--primary); }
@@ -182,6 +246,9 @@ padding: 4px 10px; border-radius: 8px;
 .cat-divider span { font-size: 14px; font-weight: 600; color: var(--secondary); }
 .cat-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255, 74, 162, 0.2); }
 
+/*
+--- FLOATING TOP CONTACT BAR (ย้ายมาไว้ด้านบนสุดของหน้าจอถาวร และปรับเอฟเฟกต์การชี้เห็นชัดเจน) ---
+*/
 .floating-contact-bar {
 position: fixed; top: 0; left: 0; right: 0;
 background: rgba(22, 18, 26, 0.98); backdrop-filter: blur(10px);
@@ -191,17 +258,24 @@ z-index: 1001; box-shadow: 0 5px 20px rgba(0,0,0,0.6);
 }
 .contact-item {
 display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500;
-color: rgba(255, 255, 255, 0.8); text-decoration: none; padding: 6px 12px; border-radius: 20px;
+color: rgba(255, 255, 255, 0.8); text-decoration: none; 
+padding: 6px 12px; border-radius: 20px;
 transition: all 0.25s ease;
 }
+/* เพิ่มเอฟเฟกต์เมื่อเมาส์เลื่อนผ่าน (Hover) ให้เห็นได้ชัดเจนว่าผ่านตรงไหน */
 .contact-item:hover { 
-color: var(--primary); background: rgba(255, 74, 162, 0.12);
-transform: translateY(-1px); text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
+color: var(--primary); 
+background: rgba(255, 74, 162, 0.12);
+transform: translateY(-1px);
+text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
 }
 .contact-item:active { color: var(--secondary); background: rgba(255, 74, 162, 0.2); }
 .contact-icon { font-size: 16px; transition: transform 0.25s ease; }
 .contact-item:hover .contact-icon { transform: scale(1.15); }
 
+/*
+--- FLOATING BOTTOM BAR (ปรับตำแหน่งปุ่มสั่งซื้ออยู่ด้านล่างปกติ) ---
+*/
 .bottom-bar {
 position: fixed; bottom: 15px; left: 0; right: 0;
 background: rgba(22, 18, 26, 0.95); backdrop-filter: blur(15px);
@@ -223,7 +297,9 @@ padding: 10px 24px; font-size: 16px; font-weight: 600; font-family: inherit;
 box-shadow: 0 4px 15px rgba(255, 74, 162, 0.4); cursor: pointer; transition: transform 0.2s;
 }
 .bb-btn:active { transform: scale(0.95); }
-
+/*
+--- MODAL SUMMARY ---
+*/
 .modal-overlay {
 position: fixed; inset: 0; background: rgba(0,0,0,0.85);
 z-index: 2000; display: flex; justify-content: center; align-items: center;
@@ -266,26 +342,6 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 .modal-items::-webkit-scrollbar { width: 4px; }
 .modal-items::-webkit-scrollbar-track { background: var(--bg-main); }
 .modal-items::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
-
-.home-preview-card {
-background: linear-gradient(145deg, rgba(255, 74, 162, 0.05) 0%, rgba(22, 18, 26, 0.8) 100%);
-border: 1px solid var(--border-color); border-radius: 14px; padding: 12px;
-flex: 0 0 55%; width: 55%; scroll-snap-align: start;
-box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.2s;
-}
-.home-preview-card img {
-width: 100%; aspect-ratio: 1 / 1; object-fit: cover; border-radius: 8px;
-border: 1px solid rgba(255, 255, 255, 0.05); margin-bottom: 8px;
-}
-.home-preview-info { display: flex; justify-content: space-between; align-items: center; font-size: 11px; }
-.home-preview-name {
-font-weight: 500; color: #fff; overflow: hidden; text-overflow: ellipsis;
-white-space: nowrap; max-width: 65%;
-}
-.home-preview-price {
-color: #ff9ecf; font-weight: 600; background: rgba(255, 74, 162, 0.15);
-padding: 2px 6px; border-radius: 6px;
-}
 </style>
 </head>
 <body>
@@ -293,6 +349,7 @@ padding: 2px 6px; border-radius: 6px;
 <div class="bg-glow-2"></div>
 <div id="pts"></div>
 
+<!-- กรอบลอยช่องทางการติดต่อ ย้ายมาล็อกตำแหน่งไว้ด้านบนสุดถาวรและปรับแต่ง Hover Effect ตามคำสั่ง -->
 <div class="floating-contact-bar">
     <a href="https://lin.ee/rI1pkuT" class="contact-item" target="_blank">
         <span class="contact-icon">💬</span><span>เจ้าเหมียวฯ.</span>
@@ -324,62 +381,37 @@ padding: 2px 6px; border-radius: 6px;
 </div>
 </div>
 <div class="content">
-
-<!-- หน้าหลัก -->
+<!-- หน้าหลัก (เพิ่มใหม่เป็นหน้าแรก) -->
 <div id="tab-home" class="tab-content active">
 <div class="info-card">
+<!-- ย้ายป้ายเช็คคิวงานมาไว้ในหน้าแรกตามคำสั่งและเปิดขนาดใหญ่พิเศษ -->
 <div class="queue-btn-dashed" onclick="alert('กำลังเปิดระบบเช็คคิว...')">
 📋 คลิกเพื่อเช็คคิวงานปัจจุบัน
 </div>
-<h3 class="info-card-title">ยินดีต้อนรับสู่ JaoMeowStore 🐱✨</h3>
-<p class="info-card-sub">ศูนย์รวมงานออกแบบและระบบจัดการร้านค้าครบวงจร</p>
-
-<!-- ส่วนเนื้อหารายละเอียดเรทราคาเดิม (นำกลับมาใส่ให้แล้ว) -->
-<div style="text-align: left; margin: 20px 0; padding: 15px; background: rgba(0,0,0,0.3); border-radius: 12px; border: 1px solid rgba(255,74,162,0.15);">
-    <p style="font-size: 15px; font-weight: 600; color: var(--secondary); margin-bottom: 10px; border-bottom: 1px solid rgba(255,74,162,0.2); padding-bottom: 5px;">💰 อัตราค่าบริการเริ่มต้น</p>
-    <div class="info-row" style="padding: 8px 0;"><span>🎨 ออกแบบโลโก้ เริ่มต้น</span><span>290.-</span></div>
-    <div class="info-row" style="padding: 8px 0;"><span>💳 ป้ายบัญชีธนาคาร เริ่มต้น</span><span>150.-</span></div>
-    <div class="info-row" style="padding: 8px 0;"><span>💧 ลายน้ำร้านค้า เริ่มต้น</span><span>99.-</span></div>
-    <div class="info-row" style="padding: 8px 0;"><span>📅 คิวชีตจัดตารางงาน เริ่มต้น</span><span>190.-</span></div>
-    <div class="info-row" style="padding: 8px 0;"><span>📊 ชีตรายรับ-จ่าย เริ่มต้น</span><span>250.-</span></div>
-</div>
 
 <div style="text-align: left; font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.9); margin-bottom: 20px;">
-<p style="margin-bottom: 10px;">🎨 <b>งานดีไซน์คุณภาพ:</b> รับออกแบบโลโก้ ป้ายบัญชี ลายน้ำ สวยงามโดดเด่นตามสไตล์ของคุณ</p>
-<p style="margin-bottom: 10px;">📊 <b>ระบบจัดการร้านค้า:</b> Google Sheet สำเร็จรูปสำหรับจัดการคิวงาน และสรุปรายรับ-รายจ่าย คำนวณอัตโนมัติ</p>
-<p>⚡ <b>บริการรวดเร็ว:</b> การันตีงานด่วน ทันใจ ใส่ใจทุกรายละเอียด สนใจรับบริการชิ้นไหนเลือกดูที่แท็บด้านบนได้เลยค่ะ</p>
+<p style="margin-bottom: 10px;"><b>เรทราคา</b></p>
+<p style="margin-bottom: 5px;">ลายน้ำ เริ่มต้นที่ 29-.</p>
+<p style="margin-bottom: 5px;">โลโก้ เริ่มต้นที่ 39-.</p>
+<p style="margin-bottom: 15px;">งานป้าย เริ่มต้นที่ 59-.</p>
+<p style="margin-bottom: 10px;"><b>Google Sheet</b></p>
+<p style="margin-bottom: 5px;">คิวชีต เริ่มต้นที่ 49-.</p>
+<p style="margin-bottom: 5px;">ชีตรายรับ - รายจ่าย เริ่มต้นที่ 69-.</p>
+<p>หลอดสถานะ 5 ไฟล์ เริ่มต้นที่ 50-.</p>
 </div>
 
-<!-- ส่วนแสดงรูปภาพผลงานตัวอย่างเบื้องต้น -->
+<!-- ส่วนแสดงรูปภาพผลงานตัวอย่างเบื้องต้นที่สามารถเลื่อนสไลด์ซ้าย-ขวาได้ (ปรับสัดส่วน 1:1 และลดขนาดความกว้างของแต่ละภาพลงเหลือ 55% ตามคำสั่ง) -->
 <div style="margin: 25px 0 15px; text-align: left;">
-<p style="font-size: 14px; font-weight: 600; color: var(--secondary); margin-bottom: 12px;">✨ ตัวอย่างผลงานแนะนำ :</p>
-<div style="display: flex; overflow-x: auto; gap: 12px; padding-bottom: 10px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; align-items: stretch;">
-    <div class="home-preview-card">
-        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&auto=format&fit=crop&q=60" alt="ตัวอย่างงานดีไซน์ 1">
-        <div class="home-preview-info">
-            <span class="home-preview-name">🎨 โลโก้ มินิมอล</span>
-            <span class="home-preview-price">฿290</span>
-        </div>
-    </div>
-    <div class="home-preview-card">
-        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&auto=format&fit=crop&q=60" alt="ตัวอย่างระบบชีต 2">
-        <div class="home-preview-info">
-            <span class="home-preview-name">📊 ชีตรายรับ-จ่าย</span>
-            <span class="home-preview-price">฿250</span>
-        </div>
-    </div>
-    <div class="home-preview-card">
-        <img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&auto=format&fit=crop&q=60" alt="ตัวอย่างงานดีไซน์ 3">
-        <div class="home-preview-info">
-            <span class="home-preview-name">💳 ป้ายบัญชี</span>
-            <span class="home-preview-price">฿150</span>
-        </div>
-    </div>
-    <div style="flex: 0 0 55%; width: 55%; display: flex; justify-content: center; align-items: center; background: rgba(255, 74, 162, 0.04); border: 2px dashed var(--border-color); border-radius: 14px; scroll-snap-align: start;">
-        <a href="https://drive.google.com/drive/folders/1-ZCQx_5hfZQ908UkYFCtNLYQX6HGaqlq" target="_blank" style="color: #fff; text-decoration: none; font-size: 14px; font-weight: 600; background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 12px 24px; border-radius: 20px; box-shadow: 0 4px 12px rgba(255, 74, 162, 0.3); transition: transform 0.2s; white-space: nowrap;">
-        📂 ตัวอย่างเพิ่มเติม
-        </a>
-    </div>
+<p style="font-size: 14px; font-weight: 600; color: var(--secondary); margin-bottom: 10px;">✨ ตัวอย่างผลงานเบื้องต้น :</p>
+<div style="display: flex; overflow-x: auto; gap: 12px; padding-bottom: 10px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; align-items: center;">
+<img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&auto=format&fit=crop&q=60" alt="ตัวอย่างงานดีไซน์ 1" style="flex: 0 0 55%; width: 55%; aspect-ratio: 1 / 1; height: auto; object-fit: cover; border-radius: 12px; border: 1px solid var(--border-color); scroll-snap-align: start;">
+<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&auto=format&fit=crop&q=60" alt="ตัวอย่างระบบชีต 2" style="flex: 0 0 55%; width: 55%; aspect-ratio: 1 / 1; height: auto; object-fit: cover; border-radius: 12px; border: 1px solid var(--border-color); scroll-snap-align: start;">
+<img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&auto=format&fit=crop&q=60" alt="ตัวอย่างงานดีไซน์ 3" style="flex: 0 0 55%; width: 55%; aspect-ratio: 1 / 1; height: auto; object-fit: cover; border-radius: 12px; border: 1px solid var(--border-color); scroll-snap-align: start;">
+<div style="flex: 0 0 55%; width: 55%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; background: rgba(255, 74, 162, 0.05); border: 2px dashed var(--border-color); border-radius: 12px; scroll-snap-align: start;">
+<a href="https://drive.google.com/drive/folders/1-ZCQx_5hfZQ908UkYFCtNLYQX6HGaqlq" target="_blank" style="color: #fff; text-decoration: none; font-size: 14px; font-weight: 600; background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 12px 24px; border-radius: 20px; box-shadow: 0 4px 12px rgba(255, 74, 162, 0.3); transition: transform 0.2s; white-space: nowrap;">
+📂 ตัวอย่างเพิ่มเติม
+</a>
+</div>
 </div>
 </div>
 
@@ -421,7 +453,6 @@ padding: 2px 6px; border-radius: 6px;
 </div>
 </div>
 </div>
-
 <div id="tab-products" class="tab-content">
 <div class="sh">
 <div class="sh-line"></div>
@@ -439,7 +470,6 @@ padding: 2px 6px; border-radius: 6px;
 </div>
 <button class="bb-btn" onclick="openSummary()">สั่งเลย ✨</button>
 </div>
-
 <div class="modal-overlay" id="summaryModal">
 <div class="modal-box">
 <div class="modal-header">
@@ -458,8 +488,8 @@ padding: 2px 6px; border-radius: 6px;
 </div>
 </div>
 </div>
-
 <script>
+// Particles Effect (Pink & Purple Accent)
 const P = document.getElementById('pts');
 ['✦', '★', '✨', '✧', '★'].forEach(e => {
 for (let j = 0; j < 3; j++) {
@@ -469,7 +499,7 @@ d.style.cssText = `left:${Math.random()*100}vw;font-size:${8+Math.random()*6}px;
 P.appendChild(d);
 }
 });
-
+// --- TAB SWITCH LOGIC ---
 function switchTab(tabId) {
 document.getElementById('btn-home').classList.remove('active');
 document.getElementById('btn-info').classList.remove('active');
@@ -480,11 +510,12 @@ document.getElementById('tab-info').classList.remove('active');
 document.getElementById('tab-products').classList.remove('active');
 document.getElementById(`tab-${tabId}`).classList.add('active');
 
+/* แก้ไขจุดนี้: เมื่อกดสลับมาที่หน้ารายละเอียด (info) ให้แสดงข้อมูลสั่งงานป้ายทันที */
 if (tabId === 'info') {
 selectTopic('สั่งงานป้าย');
 }
 }
-
+// ฟังก์ชันสำหรับจัดการเมื่อจิ้มเลือกหัวข้อลอย เพื่อเปลี่ยนส่วนข้อมูลการสั่งงานด้านล่างภายในหน้ารายละเอียด
 function selectTopic(topicName) {
 const cardTitle = document.getElementById('infoCardTitle');
 const cardSub = document.getElementById('infoCardSub');
@@ -492,11 +523,12 @@ const cardDetails = document.getElementById('infoCardDetails');
 const pillSign = document.getElementById('pill-sign');
 const pillSheet = document.getElementById('pill-sheet');
 
+// รีเซ็ตการแสดงผล Active ของปุ่มทั้งหมดก่อน
 pillSign.classList.remove('active');
 pillSheet.classList.remove('active');
 
 if (topicName === 'สั่งงานป้าย') {
-pillSign.classList.add('active');
+pillSign.classList.add('active'); // กำหนดปุ่มป้ายให้แสดงสถานะทำงาน
 cardTitle.innerText = "📋 ข้อมูลการสั่งงานป้าย";
 cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งออกแบบป้าย";
 cardDetails.innerHTML = `
@@ -518,7 +550,7 @@ cardDetails.innerHTML = `
 </div>
 `;
 } else if (topicName === 'google sheet') {
-pillSheet.classList.add('active');
+pillSheet.classList.add('active'); // กำหนดปุ่มชีตให้แสดงสถานะทำงาน
 cardTitle.innerText = "📊 ข้อมูลการสั่งงาน Google Sheet";
 cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งทำชีตระบบงาน";
 cardDetails.innerHTML = `
@@ -541,7 +573,7 @@ cardDetails.innerHTML = `
 `;
 }
 }
-
+// --- PRODUCT DATA ---
 const products = [
 { id: 'p1', cat: 'ออกแบบโลโก้ (Logo)', name: 'โลโก้ มินิมอล', desc: 'แก้ไขได้ 2 ครั้ง ส่งไฟล์ PNG/JPG', price: 290, icon: '🎨' },
 { id: 'p2', cat: 'ออกแบบโลโก้ (Logo)', name: 'โลโก้ การ์ตูน/น่ารัก', desc: 'แก้ไขได้ 3 ครั้ง พร้อมไฟล์เวกเตอร์', price: 450, icon: '🐱' },
@@ -551,7 +583,7 @@ const products = [
 { id: 'p6', cat: 'ชีตสรุป & คิวชีต', name: 'ชีตรายรับ - รายจ่าย', desc: 'ไฟล์สำเร็จรูป คำนวณอัตโนมัติ', price: 250, icon: '📊' }
 ];
 let cart = [];
-
+// Render Grid
 function renderProducts() {
 const grid = document.getElementById('productGrid');
 let currentCat = '';
@@ -573,7 +605,7 @@ html += `
 });
 grid.innerHTML = html;
 }
-
+// Toggle Selection
 function toggleItem(id) {
 const card = document.getElementById(`card-${id}`);
 const product = products.find(p => p.id === id);
@@ -587,7 +619,7 @@ card.classList.add('selected');
 }
 updateBottomBar();
 }
-
+// Update Bottom Bar
 function updateBottomBar() {
 const bar = document.getElementById('bottomBar');
 if (cart.length > 0) {
@@ -599,7 +631,7 @@ bar.classList.remove('active');
 closeSummary();
 }
 }
-
+// Open Summary Modal
 function openSummary() {
 if(cart.length === 0) return;
 const listEl = document.getElementById('modalItemsList');
@@ -618,11 +650,10 @@ listEl.innerHTML = html;
 document.getElementById('modalTotalPrice').innerText = total;
 document.getElementById('summaryModal').classList.add('show');
 }
-
 function closeSummary() {
 document.getElementById('summaryModal').classList.remove('show');
 }
-
+// Checkout
 function checkout() {
 let total = 0;
 let text = "สรุปรายการสั่งซื้อ [JaoMeowStore]\n\n";
