@@ -396,15 +396,17 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 
 <!-- กรอบลอยช่องทางการติดต่อ ล็อกตำแหน่งไว้ท้ายสุดของหน้าจอถาวรตามคำสั่ง -->
 <div class="floating-contact-bar">
-<a href="https://lin.ee/Vt7DR6S" class="contact-item" target="_blank">
-<span class="contact-icon">💬</span><span>Line: @997pfoig</span>
-</a>
-<a href="#" class="contact-item">
-<span class="contact-icon">👥</span><span>Facebook</span>
-</a>
-<a href="#" class="contact-item">
-<span class="contact-icon">📸</span><span>IG</span>
-</a>
+    <a href="https://lin.ee/Vt7DR6S" class="contact-item" target="_blank">
+        <span class="contact-icon">💬</span><span>Line: @997pfoig</span>
+    </a>
+    <!-- ใส่ลิงก์เพจ Facebook ตรงช่อง href -->
+    <a href="https://facebook.com/YOUR_PAGE_URL" class="contact-item" target="_blank">
+        <span class="contact-icon">👥</span><span>Facebook</span>
+    </a>
+    <!-- ใส่ลิงก์ IG ตรงช่อง href -->
+    <a href="https://instagram.com/YOUR_IG_URL" class="contact-item" target="_blank">
+        <span class="contact-icon">📸</span><span>IG</span>
+    </a>
 </div>
 
 <div class="bottom-bar" id="bottomBar">
@@ -427,9 +429,9 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 <span>ยอดที่ต้องชำระ:</span>
 <span class="modal-total-price">฿<span id="modalTotalPrice">0</span></span>
 </div>
-<button class="modal-btn" onclick="checkout()">
+<div class="modal-btn" onclick="checkout()">
 💬 คัดลอก & สั่งผ่าน LINE
-</button>
+</div>
 </div>
 </div>
 <script>
