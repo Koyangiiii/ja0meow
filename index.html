@@ -182,11 +182,18 @@ display: flex; gap: 10px; justify-content: center; margin-bottom: 20px;
 }
 .topic-pill {
 background: rgba(255, 74, 162, 0.1); border: 1px solid var(--primary);
-color: #fff; padding: 8px 16px; border-radius: 20px; font-size: 13px;
+color: rgba(255, 255, 255, 0.7); padding: 8px 16px; border-radius: 20px; font-size: 13px;
 font-weight: 500; cursor: pointer; transition: all 0.2s ease;
 box-shadow: 0 4px 10px rgba(255, 74, 162, 0.1);
 }
-.topic-pill:active { transform: scale(0.95); background: var(--primary); }
+.topic-pill:active { transform: scale(0.95); }
+/* สไตล์เพิ่มพิเศษเมื่อมีการกดเลือกหัวข้อย่อย */
+.topic-pill.active {
+background: var(--primary);
+color: #fff;
+border-color: var(--primary);
+box-shadow: 0 4px 12px rgba(255, 74, 162, 0.3);
+}
 
 /*
 --- PRODUCTS TAB ---
@@ -412,8 +419,8 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 
 <div id="tab-info" class="tab-content">
 <div class="floating-topics-container">
-<div class="topic-pill" onclick="selectTopic('สั่งงานป้าย')">✨ สั่งงานป้าย</div>
-<div class="topic-pill" onclick="selectTopic('google sheet')">📊 google sheet</div>
+<div class="topic-pill" id="pill-sign" onclick="selectTopic('สั่งงานป้าย')">✨ สั่งงานป้าย</div>
+<div class="topic-pill" id="pill-sheet" onclick="selectTopic('google sheet')">📊 google sheet</div>
 </div>
 <div class="info-card">
 <h3 class="info-card-title" id="infoCardTitle">Showcase & Contact</h3>
@@ -512,8 +519,15 @@ function selectTopic(topicName) {
 const cardTitle = document.getElementById('infoCardTitle');
 const cardSub = document.getElementById('infoCardSub');
 const cardDetails = document.getElementById('infoCardDetails');
+const pillSign = document.getElementById('pill-sign');
+const pillSheet = document.getElementById('pill-sheet');
+
+// รีเซ็ตการแสดงผล Active ของปุ่มทั้งหมดก่อน
+pillSign.classList.remove('active');
+pillSheet.classList.remove('active');
 
 if (topicName === 'สั่งงานป้าย') {
+pillSign.classList.add('active'); // กำหนดปุ่มป้ายให้แสดงสถานะทำงาน
 cardTitle.innerText = "📋 ข้อมูลการสั่งงานป้าย";
 cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งออกแบบป้าย";
 cardDetails.innerHTML = `
@@ -535,6 +549,7 @@ cardDetails.innerHTML = `
 </div>
 `;
 } else if (topicName === 'google sheet') {
+pillSheet.classList.add('active'); // กำหนดปุ่มชีตให้แสดงสถานะทำงาน
 cardTitle.innerText = "📊 ข้อมูลการสั่งงาน Google Sheet";
 cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งทำชีตระบบงาน";
 cardDetails.innerHTML = `
