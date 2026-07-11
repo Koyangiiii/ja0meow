@@ -165,8 +165,8 @@ border-bottom: 1px dashed rgba(255,255,255,0.1);
 font-size: 14px;
 }
 .info-row:last-of-type { border-bottom: none; margin-bottom: 20px; }
-.info-row span:first-child { color: var(--primary); font-weight: 600; }
-.info-row span:last-child { color: #fff; font-weight: 500; }
+.info-row span:first-child { color: var(--primary); font-weight: 600; text-align: left; padding-right: 10px; }
+.info-row span:last-child { color: #fff; font-weight: 500; text-align: right; }
 .review-placeholder {
 border: 1.5px dashed rgba(255,255,255,0.15);
 border-radius: 12px;
@@ -247,7 +247,7 @@ padding: 4px 10px; border-radius: 8px;
 .cat-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255, 74, 162, 0.2); }
 
 /*
---- FLOATING TOP CONTACT BAR (ย้ายมาไว้ด้านบนสุดของหน้าจอถาวร และปรับเอฟเฟกต์การชี้เห็นชัดเจน) ---
+--- FLOATING TOP CONTACT BAR ---
 */
 .floating-contact-bar {
 position: fixed; top: 0; left: 0; right: 0;
@@ -262,7 +262,6 @@ color: rgba(255, 255, 255, 0.8); text-decoration: none;
 padding: 6px 12px; border-radius: 20px;
 transition: all 0.25s ease;
 }
-/* เพิ่มเอฟเฟกต์เมื่อเมาส์เลื่อนผ่าน (Hover) ให้เห็นได้ชัดเจนว่าผ่านตรงไหน */
 .contact-item:hover { 
 color: var(--primary); 
 background: rgba(255, 74, 162, 0.12);
@@ -274,7 +273,7 @@ text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
 .contact-item:hover .contact-icon { transform: scale(1.15); }
 
 /*
---- FLOATING BOTTOM BAR (ปรับตำแหน่งปุ่มสั่งซื้ออยู่ด้านล่างปกติ) ---
+--- FLOATING BOTTOM BAR ---
 */
 .bottom-bar {
 position: fixed; bottom: 15px; left: 0; right: 0;
@@ -349,7 +348,6 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 <div class="bg-glow-2"></div>
 <div id="pts"></div>
 
-<!-- กรอบลอยช่องทางการติดต่อ ย้ายมาล็อกตำแหน่งไว้ด้านบนสุดถาวรและปรับแต่ง Hover Effect ตามคำสั่ง -->
 <div class="floating-contact-bar">
     <a href="https://lin.ee/rI1pkuT" class="contact-item" target="_blank">
         <span class="contact-icon">💬</span><span>เจ้าเหมียวฯ.</span>
@@ -381,15 +379,13 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 </div>
 </div>
 <div class="content">
-<!-- หน้าหลัก (เพิ่มใหม่เป็นหน้าแรก) -->
+
 <div id="tab-home" class="tab-content active">
 <div class="info-card">
-<!-- ย้ายป้ายเช็คคิวงานมาไว้ในหน้าแรกตามคำสั่งและเปิดขนาดใหญ่พิเศษ -->
 <div class="queue-btn-dashed" onclick="alert('กำลังเปิดระบบเช็คคิว...')">
 📋 คลิกเพื่อเช็คคิวงานปัจจุบัน
 </div>
 
-<!-- ปรับปรุงข้อความเรทราคาให้เข้ากับธีม Cyberpunk ชมพู-ดำ -->
 <div style="text-align: left; font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.9); margin-bottom: 20px;">
 <p style="margin-bottom: 12px; font-size: 16px; font-weight: 700; color: var(--primary); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px;">
     <span>✨</span> เรทราคางานออกแบบ
@@ -410,7 +406,6 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 </div>
 </div>
 
-<!-- ส่วนแสดงรูปภาพผลงานตัวอย่างเบื้องต้นที่สามารถเลื่อนสไลด์ซ้าย-ขวาได้ (ปรับสัดส่วน 1:1 และลดขนาดความกว้างของแต่ละภาพลงเหลือ 55% ตามคำสั่ง) -->
 <div style="margin: 25px 0 15px; text-align: left;">
 <p style="font-size: 14px; font-weight: 600; color: var(--secondary); margin-bottom: 10px;">✨ ตัวอย่างผลงาน :</p>
 <div style="display: flex; overflow-x: auto; gap: 12px; padding-bottom: 10px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; align-items: center;">
@@ -437,29 +432,7 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 <h3 class="info-card-title" id="infoCardTitle">Showcase & Contact</h3>
 <p class="info-card-sub" id="infoCardSub">ช่องทางการติดต่อและรายละเอียดร้านค้า</p>
 <div id="infoCardDetails">
-<div class="info-row">
-<span>Line</span>
-<span>เจ้าเหมียวฯ.</span>
-</div>
-<div class="info-row">
-<span>Facebook</span>
-<span>เจ้าเหมียว วีสอง</span>
-</div>
-<div class="info-row">
-<span>เวลาทำการ</span>
-<span>11:00 - 00:00 น.</span>
-</div>
-<div class="info-row">
-<span>การรับประกัน</span>
-<span>งานด่วน เร็ว ทันใจ</span>
-</div>
-<div class="info-row">
-<span style="color:#ff9ecf;">หมายเหตุ</span>
-<span style="font-size:12px; text-align:right;">กรุณาแจ้งบรีฟงานอย่างละเอียด<br>เพื่อความรวดเร็วในการจัดทำค่ะ</span>
-</div>
-<div class="review-placeholder">
-พื้นที่แสดงรีวิวลูกค้า (Coming Soon)
-</div>
+<!-- ข้อมูลจุดนี้จะถูกเปลี่ยนแบบ Dynamic ด้วย JavaScript ฟังก์ชัน selectTopic() ด้านล่าง -->
 </div>
 </div>
 </div>
@@ -520,7 +493,6 @@ document.getElementById('tab-info').classList.remove('active');
 document.getElementById('tab-products').classList.remove('active');
 document.getElementById(`tab-${tabId}`).classList.add('active');
 
-/* แก้ไขจุดนี้: เมื่อกดสลับมาที่หน้ารายละเอียด (info) ให้แสดงข้อมูลสั่งงานป้ายทันที */
 if (tabId === 'info') {
 selectTopic('สั่งงานป้าย');
 }
@@ -533,34 +505,36 @@ const cardDetails = document.getElementById('infoCardDetails');
 const pillSign = document.getElementById('pill-sign');
 const pillSheet = document.getElementById('pill-sheet');
 
-// รีเซ็ตการแสดงผล Active ของปุ่มทั้งหมดก่อน
 pillSign.classList.remove('active');
 pillSheet.classList.remove('active');
 
 if (topicName === 'สั่งงานป้าย') {
-pillSign.classList.add('active'); // กำหนดปุ่มป้ายให้แสดงสถานะทำงาน
-cardTitle.innerText = "📋 ข้อมูลการสั่งงานป้าย";
+pillSign.classList.add('active'); 
+cardTitle.innerText = "📋 วิธีการสั่งงานป้าย";
 cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งออกแบบป้าย";
 cardDetails.innerHTML = `
-<div class="info-row">
-<span>1. แจ้งประเภทป้าย</span>
-<span>ป้ายบัญชี / ลายน้ำ / โลโก้</span>
+<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+<span style="color: var(--primary);">1. เลือกบล็อก/ของตกแต่ง/ตัวตูน</span>
+<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400;">(หากบล็อกไหนที่ใส่รูปได้สามารถแจ้งทางร้านได้ว่าอยากใส่รูปหรือตัวตูน)</span>
 </div>
-<div class="info-row">
-<span>2. ระบุโทนสี & แนวทาง</span>
-<span>หวาน / มินิมอล / หรูหรา</span>
+<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+<span style="color: var(--primary);">2. แจ้งโทนสี</span>
+<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400;">สามารถเอารหัสสีหรือพาเลทสีที่ต้องการได้ค่ะ</span>
 </div>
-<div class="info-row">
-<span>3. ส่งข้อความ/รูปภาพ</span>
-<span>ส่งข้อความที่จะใส่ในป้ายทาง LINE</span>
+<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+<span style="color: var(--primary);">3. แจ้งรายละเอียด</span>
+<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400;">ที่ต้องการจะใส่ในป้าย สามารถอ้างอิงจากบล็อกที่เลือกได้</span>
 </div>
-<div class="info-row">
-<span>ระยะเวลาผลิต</span>
-<span>1-2 วันหลังชำระเงิน</span>
+<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+<span style="color: #ff9ecf; font-weight: 600;">⚠️ ข้อกำหนดการส่งรายละเอียด</span>
+<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400; line-height: 1.5;">
+- ลูกค้าต้องพิมพ์ส่งให้ทางร้านเท่านั้น<br>
+- ก่อนส่งรายละเอียดให้ทางร้าน ลูกค้าเช็ครายละเอียดก่อนส่งให้ทางร้านก่อนนะคะ ทางร้านใส่ข้อความตามที่ลูกค้าแจ้งมานะคะ
+</span>
 </div>
 `;
 } else if (topicName === 'google sheet') {
-pillSheet.classList.add('active'); // กำหนดปุ่มชีตให้แสดงสถานะทำงาน
+pillSheet.classList.add('active'); 
 cardTitle.innerText = "📊 ข้อมูลการสั่งงาน Google Sheet";
 cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งทำชีตระบบงาน";
 cardDetails.innerHTML = `
