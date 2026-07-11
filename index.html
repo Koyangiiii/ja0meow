@@ -21,7 +21,7 @@ body {
 font-family: 'Kanit', sans-serif;
 background: var(--bg-main); color: #fff;
 overflow-x: hidden;
-padding-bottom: 110px; /* เว้นที่ให้ตะกร้าล่างสุด */
+padding-bottom: 180px; /* เพิ่มพื้นที่ด้านล่างเพื่อรองรับกรอบลอยและตะกร้าสินค้าไม่ให้ทับซ้อนข้อมูล */
 }
 /* Background Glow Effects */
 .bg-glow-1 {
@@ -235,15 +235,33 @@ padding: 4px 10px; border-radius: 8px;
 .cat-divider { grid-column: 1 / -1; margin: 10px 0 5px; display: flex; align-items: center; gap: 10px; }
 .cat-divider span { font-size: 14px; font-weight: 600; color: var(--secondary); }
 .cat-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255, 74, 162, 0.2); }
+
 /*
---- FLOATING BOTTOM BAR ---
+--- FLOATING BOTTOM CONTACT BAR (กรอบลอยช่องทางติดต่อ - อยู่ท้ายสุดของหน้าจอถาวร) ---
+*/
+.floating-contact-bar {
+position: fixed; bottom: 0; left: 0; right: 0;
+background: rgba(22, 18, 26, 0.98); backdrop-filter: blur(10px);
+border-top: 1px solid var(--border-color); padding: 12px 20px;
+display: flex; justify-content: center; gap: 20px; align-items: center;
+z-index: 1001; box-shadow: 0 -5px 20px rgba(0,0,0,0.6);
+}
+.contact-item {
+display: flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 500;
+color: #fff; text-decoration: none; transition: color 0.2s;
+}
+.contact-item:active { color: var(--primary); }
+.contact-icon { font-size: 16px; }
+
+/*
+--- FLOATING BOTTOM BAR (ปรับตำแหน่งปุ่มสั่งซื้อให้ขยับขึ้นมาด้านบนแถบติดต่อลอย) ---
 */
 .bottom-bar {
-position: fixed; bottom: 0; left: 0; right: 0;
+position: fixed; bottom: 44px; left: 0; right: 0;
 background: rgba(22, 18, 26, 0.95); backdrop-filter: blur(15px);
 border-top: 1px solid var(--primary); padding: 15px 24px;
 display: flex; justify-content: space-between; align-items: center;
-transform: translateY(100%); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+transform: translateY(150%); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 box-shadow: 0 -10px 30px rgba(0,0,0,0.5); z-index: 1000;
 }
 .bottom-bar.active { transform: translateY(0); }
@@ -326,15 +344,12 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 <div class="hero-title">JaoMeowStore</div>
 <div class="hero-sub">เจ้าเหมียวรับทำ ป้าย โลโก้ ลายน้ำ คิวชีต ชีตรายรับ - รายจ่าย</div>
 <div class="tab-container">
-<!-- ปรับ class active มาอยู่ที่ปุ่มรายละเอียดเพื่อให้สอดคล้องกับหน้าแรกเริ่มต้น -->
 <button class="tab-btn active" id="btn-info" onclick="switchTab('info')">รายละเอียด</button>
 <button class="tab-btn" id="btn-products" onclick="switchTab('products')">กลุ่ม</button>
 </div>
 </div>
 <div class="content">
-<!-- ปรับ class active มาไว้ที่ tab-info เพื่อให้หน้าแรกเริ่มต้นเป็นหน้ารายละเอียด -->
 <div id="tab-info" class="tab-content active">
-<!-- เพิ่มหัวข้อลอยให้จิ้มเลือกได้ในหน้ารายละเอียด -->
 <div class="floating-topics-container">
 <div class="topic-pill" onclick="selectTopic('สั่งงานป้าย')">✨ สั่งงานป้าย</div>
 <div class="topic-pill" onclick="selectTopic('google sheet')">📊 google sheet</div>
@@ -378,6 +393,20 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 </div>
 </div>
 </div>
+
+<!-- กรอบลอยช่องทางการติดต่อ ล็อกตำแหน่งไว้ท้ายสุดของหน้าจอถาวรตามคำสั่ง -->
+<div class="floating-contact-bar">
+<a href="https://lin.ee/Vt7DR6S" class="contact-item" target="_blank">
+<span class="contact-icon">💬</span><span>Line: @997pfoig</span>
+</a>
+<a href="#" class="contact-item">
+<span class="contact-icon">👥</span><span>Facebook</span>
+</a>
+<a href="#" class="contact-item">
+<span class="contact-icon">📸</span><span>IG</span>
+</a>
+</div>
+
 <div class="bottom-bar" id="bottomBar">
 <div class="bb-info">
 <div class="bb-count" id="cartCount">เลือก 0 รายการ</div>
@@ -473,7 +502,7 @@ cardDetails.innerHTML = `
 `;
 }
 }
-// --- PRODUCT DATA (ปรับตัวอย่างเป็นประเภทบริการของร้านคุณเพื่อความสมจริง แต่ใช้โครงสร้างเดิม) ---
+// --- PRODUCT DATA ---
 const products = [
 { id: 'p1', cat: 'ออกแบบโลโก้ (Logo)', name: 'โลโก้ มินิมอล', desc: 'แก้ไขได้ 2 ครั้ง ส่งไฟล์ PNG/JPG', price: 290, icon: '🎨' },
 { id: 'p2', cat: 'ออกแบบโลโก้ (Logo)', name: 'โลโก้ การ์ตูน/น่ารัก', desc: 'แก้ไขได้ 3 ครั้ง พร้อมไฟล์เวกเตอร์', price: 450, icon: '🐱' },
@@ -553,7 +582,7 @@ document.getElementById('summaryModal').classList.add('show');
 function closeSummary() {
 document.getElementById('summaryModal').classList.remove('show');
 }
-// Checkout (Copy Text & Redirect Immediate)
+// Checkout
 function checkout() {
 let total = 0;
 let text = "สรุปรายการสั่งซื้อ [JaoMeowStore]\n\n";
@@ -576,7 +605,6 @@ document.body.removeChild(tempInput);
 closeSummary();
 window.location.href = "https://lin.ee/Vt7DR6S";
 }
-// Init
 renderProducts();
 </script>
 </body>
