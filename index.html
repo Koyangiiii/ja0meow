@@ -151,14 +151,55 @@ background: var(--primary); color: #fff; border-color: var(--primary);
 box-shadow: 0 4px 12px rgba(255, 74, 162, 0.3);
 }
 
-/* PRODUCTS TAB */
-.sh { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; padding: 0 5px; }
+/* PRODUCTS TAB & SUB TABS */
+.sh { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 0 5px; }
 .sh-line {
 width: 4px; height: 22px;
 background: linear-gradient(180deg, var(--primary), var(--secondary));
 border-radius: 4px;
 }
 .sh h2 { font-size: 18px; font-weight: 700; color: #fff; }
+
+.sub-tab-scroll {
+display: flex;
+overflow-x: auto;
+gap: 8px;
+padding: 4px 4px 14px 4px;
+margin-bottom: 15px;
+scroll-snap-type: x mandatory;
+-webkit-overflow-scrolling: touch;
+}
+.sub-tab-scroll::-webkit-scrollbar { height: 4px; }
+.sub-tab-scroll::-webkit-scrollbar-track { background: transparent; }
+.sub-tab-scroll::-webkit-scrollbar-thumb { background: rgba(255, 74, 162, 0.3); border-radius: 10px; }
+
+.sub-tab-btn {
+flex: 0 0 auto;
+scroll-snap-align: start;
+background: rgba(22, 18, 26, 0.8);
+border: 1px solid rgba(255, 74, 162, 0.3);
+color: var(--text-muted);
+padding: 8px 16px;
+border-radius: 18px;
+font-family: inherit;
+font-size: 13px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.25s ease;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.sub-tab-btn:hover {
+border-color: var(--secondary);
+color: #fff;
+}
+.sub-tab-btn.active {
+background: linear-gradient(135deg, var(--primary), var(--secondary));
+color: #fff;
+border-color: transparent;
+box-shadow: 0 0 12px rgba(255, 74, 162, 0.4);
+font-weight: 600;
+}
+
 .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
 .item-card {
 background: var(--bg-card); border: 1.5px solid rgba(255,255,255,0.08);
@@ -406,6 +447,17 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 <div class="sh-line"></div>
 <h2>หมวดหมู่สินค้า / บริการ</h2>
 </div>
+
+<!-- เพิ่มแท็บตัวเลือกกลุ่มย่อย ตกแต่งตามธีมร้าน -->
+<div class="sub-tab-scroll">
+<button class="sub-tab-btn active" id="sub-all" onclick="filterGroup('all')">🌌 กลุ่มทั้งหมด</button>
+<button class="sub-tab-btn" id="sub-รวม" onclick="filterGroup('รวม')">✨ กลุ่มรวม</button>
+<button class="sub-tab-btn" id="sub-ตูน" onclick="filterGroup('ตูน')">🐱 กลุ่มตูน</button>
+<button class="sub-tab-btn" id="sub-ของตกแต่ง" onclick="filterGroup('ของตกแต่ง')">🎀 กลุ่มของตกแต่ง</button>
+<button class="sub-tab-btn" id="sub-บล็อก" onclick="filterGroup('บล็อก')">🧱 กลุ่มบล็อก</button>
+<button class="sub-tab-btn" id="sub-สอน" onclick="filterGroup('สอน')">📚 กลุ่มสอน</button>
+</div>
+
 <div class="grid-container" id="productGrid"></div>
 </div>
 </div>
@@ -460,6 +512,7 @@ document.getElementById('tab-products').classList.remove('active');
 document.getElementById(`tab-${tabId}`).classList.add('active');
 
 if (tabId === 'info') { selectTopic('สั่งงานป้าย'); }
+if (tabId === 'products') { filterGroup('all'); }
 }
 
 function selectTopic(topicName) {
@@ -539,28 +592,41 @@ cardDetails.innerHTML = `
 }
 }
 
-// PRODUCT DATA
+// PRODUCT DATA (เพิ่มฟิลด์ group เพื่อนำมาคัดกรองตามกลุ่มย่อยที่กำหนด)
 const products = [
-{ id: 'p1', cat: 'ออกแบบโลโก้ (Logo)', name: 'โลโก้ มินิมอล', desc: 'แก้ไขได้ 2 ครั้ง ส่งไฟล์ PNG/JPG', price: 290, icon: '🎨' },
-{ id: 'p2', cat: 'ออกแบบโลโก้ (Logo)', name: 'โลโก้ การ์ตูน/น่ารัก', desc: 'แก้ไขได้ 3 ครั้ง พร้อมไฟล์เวกเตอร์', price: 450, icon: '🐱' },
-{ id: 'p3', cat: 'ป้ายลายน้ำ & ป้ายบัญชี', name: 'ลายน้ำพ่อค้า-แม่ค้า', desc: 'ป้ายชื่อร้านพื้นหลังใส', price: 99, icon: '💧' },
-{ id: 'p4', cat: 'ป้ายลายน้ำ & ป้ายบัญชี', name: 'ป้ายบัญชีธนาคาร', desc: 'ตกแต่งธีมตามสั่ง สวยงามสแกนง่าย', price: 150, icon: '💳' },
-{ id: 'p5', cat: 'ชีตสรุป & คิวชีต', name: 'คิวชีตจัดตารางงาน', desc: 'สำหรับพ่อค้าแม่ค้าคิวแน่น', price: 190, icon: '📅' },
-{ id: 'p6', cat: 'ชีตสรุป & คิวชีต', name: 'ชีตรายรับ - รายจ่าย', desc: 'ไฟล์สำเร็จรูป คำนวณอัตโนมัติ', price: 250, icon: '📊' }
+{ id: 'p1', group: 'รวม', cat: 'ออกแบบโลโก้ (Logo)', name: 'โลโก้ มินิมอล', desc: 'แก้ไขได้ 2 ครั้ง ส่งไฟล์ PNG/JPG', price: 290, icon: '🎨' },
+{ id: 'p2', group: 'ตูน', cat: 'ออกแบบโลโก้ (Logo)', name: 'โลโก้ การ์ตูน/น่ารัก', desc: 'แก้ไขได้ 3 ครั้ง พร้อมไฟล์เวกเตอร์', price: 450, icon: '🐱' },
+{ id: 'p3', group: 'ของตกแต่ง', cat: 'ป้ายลายน้ำ & ป้ายบัญชี', name: 'ลายน้ำพ่อค้า-แม่ค้า', desc: 'ป้ายชื่อร้านพื้นหลังใส', price: 99, icon: '💧' },
+{ id: 'p4', group: 'บล็อก', cat: 'ป้ายลายน้ำ & ป้ายบัญชี', name: 'ป้ายบัญชีธนาคาร', desc: 'ตกแต่งธีมตามสั่ง สวยงามสแกนง่าย', price: 150, icon: '💳' },
+{ id: 'p5', group: 'สอน', cat: 'ชีตสรุป & คิวชีต', name: 'คิวชีตจัดตารางงาน', desc: 'สำหรับพ่อค้าแม่ค้าคิวแน่น', price: 190, icon: '📅' },
+{ id: 'p6', group: 'สอน', cat: 'ชีตสรุป & คิวชีต', name: 'ชีตรายรับ - รายจ่าย', desc: 'ไฟล์สำเร็จรูป คำนวณอัตโนมัติ', price: 250, icon: '📊' }
 ];
 let cart = [];
+let currentFilterGroup = 'all';
 
 function renderProducts() {
 const grid = document.getElementById('productGrid');
 let currentCat = '';
 let html = '';
-products.forEach(p => {
+
+// กรองสินค้าตามกลุ่มย่อยที่เลือก
+const filteredProducts = currentFilterGroup === 'all' 
+    ? products 
+    : products.filter(p => p.group === currentFilterGroup);
+
+if (filteredProducts.length === 0) {
+    grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 40px 0; font-size: 14px;">🌟 ยังไม่มีรายการสินค้าในกลุ่มนี้</div>`;
+    return;
+}
+
+filteredProducts.forEach(p => {
 if (p.cat !== currentCat) {
 html += `<div class="cat-divider"><span>${p.cat}</span></div>`;
 currentCat = p.cat;
 }
+const isSelected = cart.some(item => item.id === p.id) ? 'selected' : '';
 html += `
-<div class="item-card" id="card-${p.id}" onclick="toggleItem('${p.id}')">
+<div class="item-card ${isSelected}" id="card-${p.id}" onclick="toggleItem('${p.id}')">
 <div class="check-circle"></div>
 <div class="card-icon">${p.icon}</div>
 <div class="card-title">${p.name}</div>
@@ -572,16 +638,31 @@ html += `
 grid.innerHTML = html;
 }
 
+// ฟังก์ชันสำหรับกรองกลุ่มย่อยในหน้ากลุ่ม
+function filterGroup(groupName) {
+currentFilterGroup = groupName;
+
+// รีเซ็ตคลาส active ของปุ่มกลุ่มย่อยทั้งหมด
+const buttons = document.querySelectorAll('.sub-tab-btn');
+buttons.forEach(btn => btn.classList.remove('active'));
+
+// ใส่คลาส active ให้ปุ่มที่เลือก
+document.getElementById(`sub-${groupName}`).classList.add('active');
+
+// เรนเดอร์รายการสินค้าใหม่ตามที่กรอง
+renderProducts();
+}
+
 function toggleItem(id) {
 const card = document.getElementById(`card-${id}`);
 const product = products.find(p => p.id === id);
 const index = cart.findIndex(item => item.id === id);
 if (index > -1) {
 cart.splice(index, 1);
-card.classList.remove('selected');
+if(card) card.classList.remove('selected');
 } else {
 cart.push(product);
-card.classList.add('selected');
+if(card) card.classList.add('selected');
 }
 updateBottomBar();
 }
