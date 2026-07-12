@@ -173,12 +173,20 @@ text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
 .contact-icon { font-size: 16px; transition: transform 0.25s ease; }
 .contact-item:hover .contact-icon { transform: scale(1.15); }
 
-/* GALLERY */
+/* GALLERY & DECORATION */
+.gallery-wrapper {
+background: rgba(10, 8, 13, 0.5);
+border: 1px solid var(--border-color);
+border-radius: 16px;
+padding: 20px 16px;
+margin-top: 30px;
+box-shadow: inset 0 0 15px rgba(255, 74, 162, 0.05);
+}
 .gallery-scroll {
 display: flex;
 overflow-x: auto;
 gap: 15px;
-padding: 10px 0;
+padding: 10px 5px;
 scroll-snap-type: x mandatory;
 scrollbar-width: none;
 }
@@ -190,6 +198,35 @@ object-fit: cover;
 border-radius: 15px;
 scroll-snap-align: start;
 border: 2px solid rgba(255, 74, 162, 0.3);
+box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+transition: all 0.3s ease;
+cursor: pointer;
+}
+.gallery-img:hover {
+transform: scale(1.04) translateY(-4px);
+border-color: var(--secondary);
+box-shadow: 0 8px 25px rgba(255, 126, 187, 0.4);
+}
+.more-gallery-link {
+display: inline-block;
+color: var(--secondary);
+text-decoration: none;
+font-weight: 600;
+font-size: 14px;
+padding: 8px 18px;
+border: 1px solid rgba(255, 126, 187, 0.3);
+border-radius: 20px;
+background: rgba(255, 126, 187, 0.03);
+transition: all 0.25s ease;
+text-shadow: 0 0 5px rgba(255, 126, 187, 0.3);
+}
+.more-gallery-link:hover {
+color: #fff;
+background: linear-gradient(135deg, var(--primary), var(--secondary));
+border-color: transparent;
+transform: translateY(-2px);
+box-shadow: 0 4px 15px rgba(255, 74, 162, 0.4);
+text-shadow: none;
 }
 </style>
 </head>
@@ -273,16 +310,19 @@ border: 2px solid rgba(255, 74, 162, 0.3);
 </div>
 </div>
 
-<div style="margin-top: 30px;">
-    <p style="font-weight: 700; color: var(--primary); margin-bottom: 15px; font-size: 16px;">✨ ตัวอย่างงาน</p>
+<!-- ปรับแต่งส่วนตัวอย่างงานและลิงก์เพิ่มเติมตามที่กำหนด -->
+<div class="gallery-wrapper">
+    <p style="font-weight: 700; color: var(--primary); margin-bottom: 10px; font-size: 16px; text-shadow: 0 0 10px rgba(255, 74, 162, 0.3); text-align: left; display: flex; align-items: center; gap: 6px;">
+        <span>✨</span> ตัวอย่างงานออกแบบ
+    </p>
     <div class="gallery-scroll">
         <img src="https://i.postimg.cc/0QzdR8Nw/ipv-block-review5-20260708123725.png" class="gallery-img">
         <img src="https://i.postimg.cc/50XqdxtQ/ipv-block-review5-20260708123753.png" class="gallery-img">
         <img src="https://i.postimg.cc/hjXbWSG7/ipv-block-review5-20260708123941.png" class="gallery-img">
         <img src="https://i.postimg.cc/vmqLN1Gx/ipv-block-review5-20260708124031.png" class="gallery-img">
     </div>
-    <div style="text-align: center; margin-top: 15px;">
-        <a href="https://drive.google.com/drive/folders/1-ZCQx_5hfZQ908UkYFCtNLYQX6HGaqlq" style="color: var(--secondary); text-decoration: none; font-weight: 600; font-size: 14px;">ตัวอย่างงานเพิ่มเติม</a>
+    <div style="text-align: center; margin-top: 18px;">
+        <a href="https://drive.google.com/drive/folders/1-ZCQx_5hfZQ908UkYFCtNLYQX6HGaqlq" target="_blank" class="more-gallery-link">📁 ตัวอย่างงานเพิ่มเติม</a>
     </div>
 </div>
 
