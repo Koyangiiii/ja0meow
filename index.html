@@ -21,7 +21,7 @@ font-family: 'Kanit', sans-serif;
 background: var(--bg-main); color: #fff;
 overflow-x: hidden;
 padding-top: 70px; 
-padding-bottom: 40px; 
+padding-bottom: 120px; 
 }
 /* Background Glow Effects */
 .bg-glow-1 {
@@ -87,7 +87,7 @@ background: var(--bg-card);
 border: 1px solid var(--border-color);
 border-radius: 30px;
 padding: 4px;
-width: 290px;
+width: 320px;
 z-index: 10;
 box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
@@ -117,7 +117,7 @@ box-shadow: 0 2px 10px rgba(255, 74, 162, 0.3);
 from { opacity: 0; transform: translateY(10px); }
 to { opacity: 1; transform: translateY(0); }
 }
-/* CARDS */
+/* INFO TAB */
 .info-card {
 background: var(--bg-card);
 border: 1px solid var(--border-color);
@@ -151,6 +151,93 @@ background: var(--primary); color: #fff; border-color: var(--primary);
 box-shadow: 0 4px 12px rgba(255, 74, 162, 0.3);
 }
 
+/* PRODUCTS TAB & SUB TABS */
+.sh { display: flex; align-items: center; gap: 12px; margin-bottom: 16px; padding: 0 5px; }
+.sh-line {
+width: 4px; height: 22px;
+background: linear-gradient(180deg, var(--primary), var(--secondary));
+border-radius: 4px;
+}
+.sh h2 { font-size: 18px; font-weight: 700; color: #fff; }
+
+.sub-tab-scroll {
+display: flex;
+overflow-x: auto;
+gap: 8px;
+padding: 4px 4px 14px 4px;
+margin-bottom: 15px;
+scroll-snap-type: x mandatory;
+-webkit-overflow-scrolling: touch;
+}
+.sub-tab-scroll::-webkit-scrollbar { height: 4px; }
+.sub-tab-scroll::-webkit-scrollbar-track { background: transparent; }
+.sub-tab-scroll::-webkit-scrollbar-thumb { background: rgba(255, 74, 162, 0.3); border-radius: 10px; }
+
+.sub-tab-btn {
+flex: 0 0 auto;
+scroll-snap-align: start;
+background: rgba(22, 18, 26, 0.8);
+border: 1px solid rgba(255, 74, 162, 0.3);
+color: var(--text-muted);
+padding: 8px 16px;
+border-radius: 18px;
+font-family: inherit;
+font-size: 13px;
+font-weight: 500;
+cursor: pointer;
+transition: all 0.25s ease;
+box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+.sub-tab-btn:hover {
+border-color: var(--secondary);
+color: #fff;
+}
+.sub-tab-btn.active {
+background: linear-gradient(135deg, var(--primary), var(--secondary));
+color: #fff;
+border-color: transparent;
+box-shadow: 0 0 12px rgba(255, 74, 162, 0.4);
+font-weight: 600;
+}
+
+.grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
+.item-card {
+background: var(--bg-card); border: 1.5px solid rgba(255,255,255,0.08);
+border-radius: 16px; padding: 16px; position: relative;
+cursor: pointer; transition: all 0.2s ease;
+display: flex; flex-direction: column;
+}
+.item-card:active { transform: scale(0.96); }
+.item-card.selected {
+border-color: var(--primary);
+background: linear-gradient(145deg, rgba(255, 74, 162, 0.1) 0%, var(--bg-card) 100%);
+box-shadow: 0 0 15px rgba(255, 74, 162, 0.2);
+}
+.check-circle {
+position: absolute; top: 12px; right: 12px;
+width: 22px; height: 22px; border-radius: 50%;
+border: 2px solid rgba(255,255,255,0.15);
+display: flex; justify-content: center; align-items: center;
+transition: all 0.2s;
+}
+.item-card.selected .check-circle { background: var(--primary); border-color: var(--primary); }
+.check-circle::after {
+content: '✓'; color: #fff; font-size: 12px; font-weight: bold;
+opacity: 0; transform: scale(0.5); transition: all 0.2s;
+}
+.item-card.selected .check-circle::after { opacity: 1; transform: scale(1); }
+.card-icon { font-size: 30px; margin-bottom: 10px; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.5)); }
+.card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: #fff; line-height: 1.2; }
+.card-desc { font-size: 11px; color: var(--text-muted); line-height: 1.4; margin-bottom: 12px; flex-grow: 1; }
+.card-price {
+align-self: flex-start; background: rgba(255, 74, 162, 0.15);
+color: #ff9ecf; font-weight: 600; font-size: 13px;
+padding: 4px 10px; border-radius: 8px;
+}
+.cat-divider { grid-column: 1 / -1; margin: 10px 0 5px; display: flex; align-items: center; gap: 10px; }
+.cat-divider span { font-size: 14px; font-weight: 600; color: var(--secondary); }
+.cat-divider::after { content: ''; flex: 1; height: 1px; background: rgba(255, 74, 162, 0.2); }
+
 /* FLOATING TOP CONTACT BAR */
 .floating-contact-bar {
 position: fixed; top: 0; left: 0; right: 0;
@@ -174,6 +261,73 @@ text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
 .contact-item:active { color: var(--secondary); background: rgba(255, 74, 162, 0.2); }
 .contact-icon { font-size: 16px; transition: transform 0.25s ease; }
 .contact-item:hover .contact-icon { transform: scale(1.15); }
+
+/* FLOATING BOTTOM BAR */
+.bottom-bar {
+position: fixed; bottom: 15px; left: 0; right: 0;
+background: rgba(22, 18, 26, 0.95); backdrop-filter: blur(15px);
+border: 1px solid var(--primary); padding: 15px 24px;
+display: flex; justify-content: space-between; align-items: center;
+transform: translateY(150%); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+box-shadow: 0 -10px 30px rgba(0,0,0,0.5); z-index: 1000;
+border-radius: 20px; margin: 0 15px;
+}
+.bottom-bar.active { transform: translateY(0); }
+.bb-info { display: flex; flex-direction: column; }
+.bb-count { font-size: 12px; color: var(--text-muted); margin-bottom: 2px; }
+.bb-total { font-size: 20px; font-weight: 700; color: #fff; }
+.bb-total span { color: var(--primary); font-size: 16px; margin-right: 2px; }
+.bb-btn {
+background: linear-gradient(135deg, var(--primary), #ff7ebb);
+color: #fff; border: none; border-radius: 25px;
+padding: 10px 24px; font-size: 16px; font-weight: 600; font-family: inherit;
+box-shadow: 0 4px 15px rgba(255, 74, 162, 0.4); cursor: pointer; transition: transform 0.2s;
+}
+.bb-btn:active { transform: scale(0.95); }
+
+/* MODAL SUMMARY */
+.modal-overlay {
+position: fixed; inset: 0; background: rgba(0,0,0,0.85);
+z-index: 2000; display: flex; justify-content: center; align-items: center;
+opacity: 0; pointer-events: none; transition: opacity 0.3s;
+}
+.modal-overlay.show { opacity: 1; pointer-events: all; }
+.modal-box {
+background: var(--bg-card); border: 2px solid var(--primary);
+border-radius: 20px; width: 90%; max-width: 400px; padding: 24px;
+position: relative; transform: scale(0.9); transition: transform 0.3s;
+box-shadow: 0 10px 30px rgba(255, 74, 162, 0.3);
+}
+.modal-overlay.show .modal-box { transform: scale(1); }
+.modal-header {
+display: flex; justify-content: space-between; align-items: center;
+margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 12px;
+}
+.modal-title { font-size: 18px; font-weight: 600; color: #fff; display: flex; align-items: center; gap: 8px; }
+.modal-close { font-size: 24px; color: var(--text-muted); cursor: pointer; line-height: 1; }
+.modal-items { max-height: 250px; overflow-y: auto; margin-bottom: 15px; padding-right: 5px; }
+.modal-item {
+display: flex; justify-content: space-between; align-items: flex-start;
+margin-bottom: 10px; font-size: 14px; color: #fff; gap: 10px;
+}
+.modal-item-name { flex: 1; line-height: 1.4; }
+.modal-item-price { color: #ff9ecf; font-weight: 600; }
+.modal-divider { border-top: 1px dashed rgba(255, 74, 162, 0.4); margin: 15px 0; }
+.modal-total {
+display: flex; justify-content: space-between; align-items: center;
+font-size: 16px; font-weight: 600; color: #fff; margin-bottom: 24px;
+}
+.modal-total-price { font-size: 24px; color: var(--primary); font-weight: 700; }
+.modal-btn {
+background: #00d300; color: #fff; border: none; width: 100%;
+padding: 14px; border-radius: 12px; font-size: 16px; font-weight: 600; font-family: inherit;
+cursor: pointer; display: flex; justify-content: center; align-items: center; gap: 8px;
+box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
+}
+.modal-btn:active { transform: scale(0.97); }
+.modal-items::-webkit-scrollbar { width: 4px; }
+.modal-items::-webkit-scrollbar-track { background: var(--bg-main); }
+.modal-items::-webkit-scrollbar-thumb { background: var(--primary); border-radius: 4px; }
 </style>
 </head>
 <body>
@@ -196,23 +350,24 @@ text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
 
 <div class="hero">
 <div class="hero-title">JaoMeowStore</div>
+<!-- เพิ่มเวลาเปิด-ปิดร้านกลับมาเรียบร้อยครับ -->
 <div class="hero-time">OPEN - CLOSE : 09.00 - 22.00</div>
 <div class="hero-sub">เจ้าเหมียวรับทำ ป้าย โลโก้ ลายน้ำ คิวชีต ชีตรายรับ - รายจ่าย</div>
 <div class="tab-container">
 <button class="tab-btn active" id="btn-home" onclick="switchTab('home')">หน้าหลัก</button>
-<button class="tab-btn" id="btn-group" onclick="switchTab('group')">กลุ่ม</button>
 <button class="tab-btn" id="btn-info" onclick="switchTab('info')">รายละเอียด</button>
+<button class="tab-btn" id="btn-products" onclick="switchTab('products')">กลุ่ม</button>
 </div>
 </div>
 
 <div class="content">
-<!-- หน้าหลัก -->
 <div id="tab-home" class="tab-content active">
 <div class="info-card">
 <div class="queue-btn-dashed" onclick="window.open('https://docs.google.com/spreadsheets/d/16wCpceIXo7ZxNgGABYBRbL682miaicVntDUmrrhlns8/edit?usp=drivesdk', '_blank')">
 📋 CheckQ
 </div>
 
+<!-- ส่วนเนื้อหาโปรโมชันปรับดีไซน์ใหม่ -->
 <div style="background: linear-gradient(135deg, rgba(255, 74, 162, 0.15) 0%, rgba(22, 18, 26, 0.8) 100%); border: 1.5px solid var(--primary); padding: 20px; border-radius: 18px; margin-bottom: 20px; text-align: left; box-shadow: 0 0 20px rgba(255, 74, 162, 0.25); position: relative; overflow: hidden;">
     <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: radial-gradient(circle, rgba(255,126,187,0.3) 0%, rgba(0,0,0,0) 70%); pointer-events: none;"></div>
     <p style="margin-bottom: 12px; font-size: 16px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; text-shadow: 0 0 10px rgba(255, 74, 162, 0.5);">
@@ -275,20 +430,6 @@ text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
 </div>
 </div>
 
-<!-- หน้ากลุ่ม (กู้คืนแท็บกลุ่มย่อยและข้อมูลเดิม) -->
-<div id="tab-group" class="tab-content">
-<div class="floating-topics-container">
-<div class="topic-pill" id="pill-group-1" onclick="selectGroupTopic('กลุ่มแชร์')">กลุ่มแชร์</div>
-<div class="topic-pill" id="pill-group-2" onclick="selectGroupTopic('กลุ่มอัปเดตงาน')">กลุ่มอัปเดตงาน</div>
-</div>
-<div class="info-card">
-<h3 class="info-card-title" id="groupCardTitle">Showcase & Contact</h3>
-<p class="info-card-sub" id="groupCardSub">ช่องทางการติดต่อและรายละเอียดร้านค้า</p>
-<div id="groupCardDetails"></div>
-</div>
-</div>
-
-<!-- หน้ารายละเอียด -->
 <div id="tab-info" class="tab-content">
 <div class="floating-topics-container">
 <div class="topic-pill" id="pill-sign" onclick="selectTopic('สั่งงานป้าย')">✨ สั่งงานป้าย</div>
@@ -298,6 +439,51 @@ text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
 <h3 class="info-card-title" id="infoCardTitle">Showcase & Contact</h3>
 <p class="info-card-sub" id="infoCardSub">ช่องทางการติดต่อและรายละเอียดร้านค้า</p>
 <div id="infoCardDetails"></div>
+</div>
+</div>
+
+<div id="tab-products" class="tab-content">
+<div class="sh">
+<div class="sh-line"></div>
+<h2>หมวดหมู่สินค้า / บริการ</h2>
+</div>
+
+<!-- เพิ่มแท็บตัวเลือกกลุ่มย่อย ตกแต่งตามธีมร้าน -->
+<div class="sub-tab-scroll">
+<button class="sub-tab-btn active" id="sub-all" onclick="filterGroup('all')">🌌 กลุ่มทั้งหมด</button>
+<button class="sub-tab-btn" id="sub-รวม" onclick="filterGroup('รวม')">✨ กลุ่มรวม</button>
+<button class="sub-tab-btn" id="sub-ตูน" onclick="filterGroup('ตูน')">🐱 กลุ่มตูน</button>
+<button class="sub-tab-btn" id="sub-ของตกแต่ง" onclick="filterGroup('ของตกแต่ง')">🎀 กลุ่มของตกแต่ง</button>
+<button class="sub-tab-btn" id="sub-บล็อก" onclick="filterGroup('บล็อก')">🧱 กลุ่มบล็อก</button>
+<button class="sub-tab-btn" id="sub-สอน" onclick="filterGroup('สอน')">📚 กลุ่มสอน</button>
+</div>
+
+<div class="grid-container" id="productGrid"></div>
+</div>
+</div>
+
+<div class="bottom-bar" id="bottomBar">
+<div class="bb-info">
+<div class="bb-count" id="cartCount">เลือก 0 รายการ</div>
+<div class="bb-total"><span>฿</span><span id="cartTotal">0</span></div>
+</div>
+<button class="bb-btn" onclick="openSummary()">สั่งเลย ✨</button>
+</div>
+
+<div class="modal-overlay" id="summaryModal">
+<div class="modal-box">
+<div class="modal-header">
+<div class="modal-title">🛒 สรุปรายการสั่งซื้อ</div>
+<div class="modal-close" onclick="closeSummary()">×</div>
+</div>
+<div class="modal-items" id="modalItemsList"></div>
+<div class="modal-divider"></div>
+<div class="modal-total">
+<span>ยอดที่ต้องชำระ:</span>
+<span class="modal-total-price">฿<span id="modalTotalPrice">0</span></span>
+</div>
+<div class="modal-btn" onclick="checkout()">
+💬 คัดลอก & สั่งผ่าน LINE
 </div>
 </div>
 </div>
@@ -317,64 +503,18 @@ P.appendChild(d);
 // TAB SWITCH LOGIC
 function switchTab(tabId) {
 document.getElementById('btn-home').classList.remove('active');
-document.getElementById('btn-group').classList.remove('active');
 document.getElementById('btn-info').classList.remove('active');
+document.getElementById('btn-products').classList.remove('active');
 document.getElementById(`btn-${tabId}`).classList.add('active');
-
 document.getElementById('tab-home').classList.remove('active');
-document.getElementById('tab-group').classList.remove('active');
 document.getElementById('tab-info').classList.remove('active');
+document.getElementById('tab-products').classList.remove('active');
 document.getElementById(`tab-${tabId}`).classList.add('active');
 
-if (tabId === 'group') { selectGroupTopic('กลุ่มแชร์'); }
 if (tabId === 'info') { selectTopic('สั่งงานป้าย'); }
+if (tabId === 'products') { filterGroup('all'); }
 }
 
-// ฟังก์ชันควบคุมแท็บกลุ่มย่อย
-function selectGroupTopic(topicName) {
-const cardTitle = document.getElementById('groupCardTitle');
-const cardSub = document.getElementById('groupCardSub');
-const cardDetails = document.getElementById('groupCardDetails');
-const pill1 = document.getElementById('pill-group-1');
-const pill2 = document.getElementById('pill-group-2');
-
-if(pill1 && pill2) {
-    pill1.classList.remove('active');
-    pill2.classList.remove('active');
-}
-
-if (topicName === 'กลุ่มแชร์') {
-if(pill1) pill1.classList.add('active');
-cardTitle.innerText = "กลุ่มแชร์";
-cardSub.innerText = "รายละเอียดกลุ่มแชร์";
-cardDetails.innerHTML = `
-<div style="background: rgba(255, 74, 162, 0.05); border: 1px dashed var(--border-color); padding: 20px; border-radius: 16px; text-align: left; margin-bottom: 20px;">
-    <p style="font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.6;">
-        กลุ่มแชร์ โน้ตกลุ่ม สำหรับลงโปรไฟล์ ลิงก์ร้าน หรือช่องทางติดต่อต่างๆ ของสมาชิกในกลุ่ม สามารถแลกเปลี่ยนและแชร์ข้อมูลกันได้อย่างอิสระค่ะ
-    </p>
-</div>
-<a href="#" target="_blank" style="display: inline-block; padding: 12px 30px; border-radius: 25px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; box-shadow: 0 4px 15px rgba(255,74,162,0.3);">
-    🔗 เข้ากลุ่มแชร์ที่นี่
-</a>
-`;
-} else if (topicName === 'กลุ่มอัปเดตงาน') {
-if(pill2) pill2.classList.add('active');
-cardTitle.innerText = "กลุ่มอัปเดตงาน";
-cardSub.innerText = "รายละเอียดกลุ่มอัปเดตงาน";
-cardDetails.innerHTML = `
-<div style="background: rgba(255, 74, 162, 0.05); border: 1px dashed var(--border-color); padding: 20px; border-radius: 16px; text-align: left; margin-bottom: 20px;">
-    <p style="font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.6;">
-        กลุ่มอัปเดตงาน โน้ตกลุ่ม สำหรับส่งงาน อัปเดตคิวงาน และติดตามสถานะความคืบหน้าของงานออกแบบต่างๆ จากทางร้านค่ะ
-    </p>
-</div>
-<a href="#" target="_blank" style="display: inline-block; padding: 12px 30px; border-radius: 25px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; box-shadow: 0 4px 15px rgba(255,74,162,0.3);">
-    🔗 เข้ากลุ่มอัปเดตงานที่นี่
-</a>
-`;
-}
-}
-
-// ฟังก์ชันควบคุมหน้ารายละเอียด
 function selectTopic(topicName) {
 const cardTitle = document.getElementById('infoCardTitle');
 const cardSub = document.getElementById('infoCardSub');
@@ -382,13 +522,11 @@ const cardDetails = document.getElementById('infoCardDetails');
 const pillSign = document.getElementById('pill-sign');
 const pillSheet = document.getElementById('pill-sheet');
 
-if(pillSign && pillSheet) {
-    pillSign.classList.remove('active');
-    pillSheet.classList.remove('active');
-}
+pillSign.classList.remove('active');
+pillSheet.classList.remove('active');
 
 if (topicName === 'สั่งงานป้าย') {
-if(pillSign) pillSign.classList.add('active'); 
+pillSign.classList.add('active'); 
 cardTitle.innerText = "📋 วิธีการสั่งงานป้าย";
 cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งออกแบบป้าย";
 cardDetails.innerHTML = `
@@ -425,7 +563,7 @@ cardDetails.innerHTML = `
 </div>
 `;
 } else if (topicName === 'google sheet') {
-if(pillSheet) pillSheet.classList.add('active'); 
+pillSheet.classList.add('active'); 
 cardTitle.innerText = "📊 ข้อมูลการสั่งงาน Google Sheet";
 cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งทำชีตระบบงาน";
 cardDetails.innerHTML = `
@@ -453,6 +591,140 @@ cardDetails.innerHTML = `
 `;
 }
 }
+
+// PRODUCT DATA (เพิ่มฟิลด์ group เพื่อนำมาคัดกรองตามกลุ่มย่อยที่กำหนด)
+const products = [
+{ id: 'p1', group: 'รวม', cat: 'ออกแบบโลโก้ (Logo)', name: 'โลโก้ มินิมอล', desc: 'แก้ไขได้ 2 ครั้ง ส่งไฟล์ PNG/JPG', price: 290, icon: '🎨' },
+{ id: 'p2', group: 'ตูน', cat: 'ออกแบบโลโก้ (Logo)', name: 'โลโก้ การ์ตูน/น่ารัก', desc: 'แก้ไขได้ 3 ครั้ง พร้อมไฟล์เวกเตอร์', price: 450, icon: '🐱' },
+{ id: 'p3', group: 'ของตกแต่ง', cat: 'ป้ายลายน้ำ & ป้ายบัญชี', name: 'ลายน้ำพ่อค้า-แม่ค้า', desc: 'ป้ายชื่อร้านพื้นหลังใส', price: 99, icon: '💧' },
+{ id: 'p4', group: 'บล็อก', cat: 'ป้ายลายน้ำ & ป้ายบัญชี', name: 'ป้ายบัญชีธนาคาร', desc: 'ตกแต่งธีมตามสั่ง สวยงามสแกนง่าย', price: 150, icon: '💳' },
+{ id: 'p5', group: 'สอน', cat: 'ชีตสรุป & คิวชีต', name: 'คิวชีตจัดตารางงาน', desc: 'สำหรับพ่อค้าแม่ค้าคิวแน่น', price: 190, icon: '📅' },
+{ id: 'p6', group: 'สอน', cat: 'ชีตสรุป & คิวชีต', name: 'ชีตรายรับ - รายจ่าย', desc: 'ไฟล์สำเร็จรูป คำนวณอัตโนมัติ', price: 250, icon: '📊' }
+];
+let cart = [];
+let currentFilterGroup = 'all';
+
+function renderProducts() {
+const grid = document.getElementById('productGrid');
+let currentCat = '';
+let html = '';
+
+// กรองสินค้าตามกลุ่มย่อยที่เลือก
+const filteredProducts = currentFilterGroup === 'all' 
+    ? products 
+    : products.filter(p => p.group === currentFilterGroup);
+
+if (filteredProducts.length === 0) {
+    grid.innerHTML = `<div style="grid-column: 1 / -1; text-align: center; color: var(--text-muted); padding: 40px 0; font-size: 14px;">🌟 ยังไม่มีรายการสินค้าในกลุ่มนี้</div>`;
+    return;
+}
+
+filteredProducts.forEach(p => {
+if (p.cat !== currentCat) {
+html += `<div class="cat-divider"><span>${p.cat}</span></div>`;
+currentCat = p.cat;
+}
+const isSelected = cart.some(item => item.id === p.id) ? 'selected' : '';
+html += `
+<div class="item-card ${isSelected}" id="card-${p.id}" onclick="toggleItem('${p.id}')">
+<div class="check-circle"></div>
+<div class="card-icon">${p.icon}</div>
+<div class="card-title">${p.name}</div>
+<div class="card-desc">${p.desc}</div>
+<div class="card-price">฿${p.price}</div>
+</div>
+`;
+});
+grid.innerHTML = html;
+}
+
+// ฟังก์ชันสำหรับกรองกลุ่มย่อยในหน้ากลุ่ม
+function filterGroup(groupName) {
+currentFilterGroup = groupName;
+
+// รีเซ็ตคลาส active ของปุ่มกลุ่มย่อยทั้งหมด
+const buttons = document.querySelectorAll('.sub-tab-btn');
+buttons.forEach(btn => btn.classList.remove('active'));
+
+// ใส่คลาส active ให้ปุ่มที่เลือก
+document.getElementById(`sub-${groupName}`).classList.add('active');
+
+// เรนเดอร์รายการสินค้าใหม่ตามที่กรอง
+renderProducts();
+}
+
+function toggleItem(id) {
+const card = document.getElementById(`card-${id}`);
+const product = products.find(p => p.id === id);
+const index = cart.findIndex(item => item.id === id);
+if (index > -1) {
+cart.splice(index, 1);
+if(card) card.classList.remove('selected');
+} else {
+cart.push(product);
+if(card) card.classList.add('selected');
+}
+updateBottomBar();
+}
+
+function updateBottomBar() {
+const bar = document.getElementById('bottomBar');
+if (cart.length > 0) {
+bar.classList.add('active');
+document.getElementById('cartCount').innerText = `เลือก ${cart.length} รายการ`;
+document.getElementById('cartTotal').innerText = cart.reduce((sum, item) => sum + item.price, 0);
+} else {
+bar.classList.remove('active');
+closeSummary();
+}
+}
+
+function openSummary() {
+if(cart.length === 0) return;
+const listEl = document.getElementById('modalItemsList');
+let html = '';
+let total = 0;
+cart.forEach(item => {
+html += `
+<div class="modal-item">
+<div class="modal-item-name">• ${item.name} <br><span style="font-size:11px; color:var(--text-muted)">${item.desc}</span></div>
+<div class="modal-item-price">฿${item.price}</div>
+</div>
+`;
+total += item.price;
+});
+listEl.innerHTML = html;
+document.getElementById('modalTotalPrice').innerText = total;
+document.getElementById('summaryModal').classList.add('show');
+}
+
+function closeSummary() {
+document.getElementById('summaryModal').classList.remove('show');
+}
+
+function checkout() {
+let total = 0;
+let text = "สรุปรายการสั่งซื้อ [JaoMeowStore]\n\n";
+cart.forEach(item => {
+text += `สินค้า: ${item.cat} - ${item.name}\n`;
+text += `รายละเอียด: ${item.desc}\n`;
+text += `ราคา: ${item.price} บาท\n\n`;
+total += item.price;
+});
+text += "--------------------\n";
+text += `ยอดที่ต้องชำระทั้งหมด: ${total} บาท\n\n`;
+text += "ขอบคุณที่ไว้วางใจร้านเจ้าเหมียวค่ะ\n";
+text += "กรุณารอแอดมินตอบกลับสักครู่นะคะ";
+const tempInput = document.createElement("textarea");
+tempInput.value = text;
+document.body.appendChild(tempInput);
+tempInput.select();
+try { document.execCommand("copy"); } catch (err) {}
+document.body.removeChild(tempInput);
+closeSummary();
+window.location.href = "https://lin.ee/rI1pkuT";
+}
+renderProducts();
 </script>
 </body>
 </html>
