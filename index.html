@@ -87,7 +87,7 @@ background: var(--bg-card);
 border: 1px solid var(--border-color);
 border-radius: 30px;
 padding: 4px;
-width: 220px;
+width: 290px;
 z-index: 10;
 box-shadow: 0 4px 20px rgba(0,0,0,0.4);
 }
@@ -117,7 +117,7 @@ box-shadow: 0 2px 10px rgba(255, 74, 162, 0.3);
 from { opacity: 0; transform: translateY(10px); }
 to { opacity: 1; transform: translateY(0); }
 }
-/* INFO TAB */
+/* CARDS */
 .info-card {
 background: var(--bg-card);
 border: 1px solid var(--border-color);
@@ -200,18 +200,19 @@ text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
 <div class="hero-sub">เจ้าเหมียวรับทำ ป้าย โลโก้ ลายน้ำ คิวชีต ชีตรายรับ - รายจ่าย</div>
 <div class="tab-container">
 <button class="tab-btn active" id="btn-home" onclick="switchTab('home')">หน้าหลัก</button>
+<button class="tab-btn" id="btn-group" onclick="switchTab('group')">กลุ่ม</button>
 <button class="tab-btn" id="btn-info" onclick="switchTab('info')">รายละเอียด</button>
 </div>
 </div>
 
 <div class="content">
+<!-- หน้าหลัก -->
 <div id="tab-home" class="tab-content active">
 <div class="info-card">
 <div class="queue-btn-dashed" onclick="window.open('https://docs.google.com/spreadsheets/d/16wCpceIXo7ZxNgGABYBRbL682miaicVntDUmrrhlns8/edit?usp=drivesdk', '_blank')">
 📋 CheckQ
 </div>
 
-<!-- ส่วนเนื้อหาโปรโมชันปรับดีไซน์ใหม่ -->
 <div style="background: linear-gradient(135deg, rgba(255, 74, 162, 0.15) 0%, rgba(22, 18, 26, 0.8) 100%); border: 1.5px solid var(--primary); padding: 20px; border-radius: 18px; margin-bottom: 20px; text-align: left; box-shadow: 0 0 20px rgba(255, 74, 162, 0.25); position: relative; overflow: hidden;">
     <div style="position: absolute; top: -20px; right: -20px; width: 80px; height: 80px; background: radial-gradient(circle, rgba(255,126,187,0.3) 0%, rgba(0,0,0,0) 70%); pointer-events: none;"></div>
     <p style="margin-bottom: 12px; font-size: 16px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; text-shadow: 0 0 10px rgba(255, 74, 162, 0.5);">
@@ -274,6 +275,20 @@ text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
 </div>
 </div>
 
+<!-- หน้ากลุ่ม (กู้คืนแท็บกลุ่มย่อยและข้อมูลเดิม) -->
+<div id="tab-group" class="tab-content">
+<div class="floating-topics-container">
+<div class="topic-pill" id="pill-group-1" onclick="selectGroupTopic('กลุ่มแชร์')">กลุ่มแชร์</div>
+<div class="topic-pill" id="pill-group-2" onclick="selectGroupTopic('กลุ่มอัปเดตงาน')">กลุ่มอัปเดตงาน</div>
+</div>
+<div class="info-card">
+<h3 class="info-card-title" id="groupCardTitle">Showcase & Contact</h3>
+<p class="info-card-sub" id="groupCardSub">ช่องทางการติดต่อและรายละเอียดร้านค้า</p>
+<div id="groupCardDetails"></div>
+</div>
+</div>
+
+<!-- หน้ารายละเอียด -->
 <div id="tab-info" class="tab-content">
 <div class="floating-topics-container">
 <div class="topic-pill" id="pill-sign" onclick="selectTopic('สั่งงานป้าย')">✨ สั่งงานป้าย</div>
@@ -302,15 +317,64 @@ P.appendChild(d);
 // TAB SWITCH LOGIC
 function switchTab(tabId) {
 document.getElementById('btn-home').classList.remove('active');
+document.getElementById('btn-group').classList.remove('active');
 document.getElementById('btn-info').classList.remove('active');
 document.getElementById(`btn-${tabId}`).classList.add('active');
+
 document.getElementById('tab-home').classList.remove('active');
+document.getElementById('tab-group').classList.remove('active');
 document.getElementById('tab-info').classList.remove('active');
 document.getElementById(`tab-${tabId}`).classList.add('active');
 
+if (tabId === 'group') { selectGroupTopic('กลุ่มแชร์'); }
 if (tabId === 'info') { selectTopic('สั่งงานป้าย'); }
 }
 
+// ฟังก์ชันควบคุมแท็บกลุ่มย่อย
+function selectGroupTopic(topicName) {
+const cardTitle = document.getElementById('groupCardTitle');
+const cardSub = document.getElementById('groupCardSub');
+const cardDetails = document.getElementById('groupCardDetails');
+const pill1 = document.getElementById('pill-group-1');
+const pill2 = document.getElementById('pill-group-2');
+
+if(pill1 && pill2) {
+    pill1.classList.remove('active');
+    pill2.classList.remove('active');
+}
+
+if (topicName === 'กลุ่มแชร์') {
+if(pill1) pill1.classList.add('active');
+cardTitle.innerText = "กลุ่มแชร์";
+cardSub.innerText = "รายละเอียดกลุ่มแชร์";
+cardDetails.innerHTML = `
+<div style="background: rgba(255, 74, 162, 0.05); border: 1px dashed var(--border-color); padding: 20px; border-radius: 16px; text-align: left; margin-bottom: 20px;">
+    <p style="font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.6;">
+        กลุ่มแชร์ โน้ตกลุ่ม สำหรับลงโปรไฟล์ ลิงก์ร้าน หรือช่องทางติดต่อต่างๆ ของสมาชิกในกลุ่ม สามารถแลกเปลี่ยนและแชร์ข้อมูลกันได้อย่างอิสระค่ะ
+    </p>
+</div>
+<a href="#" target="_blank" style="display: inline-block; padding: 12px 30px; border-radius: 25px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; box-shadow: 0 4px 15px rgba(255,74,162,0.3);">
+    🔗 เข้ากลุ่มแชร์ที่นี่
+</a>
+`;
+} else if (topicName === 'กลุ่มอัปเดตงาน') {
+if(pill2) pill2.classList.add('active');
+cardTitle.innerText = "กลุ่มอัปเดตงาน";
+cardSub.innerText = "รายละเอียดกลุ่มอัปเดตงาน";
+cardDetails.innerHTML = `
+<div style="background: rgba(255, 74, 162, 0.05); border: 1px dashed var(--border-color); padding: 20px; border-radius: 16px; text-align: left; margin-bottom: 20px;">
+    <p style="font-size: 13px; color: rgba(255,255,255,0.85); line-height: 1.6;">
+        กลุ่มอัปเดตงาน โน้ตกลุ่ม สำหรับส่งงาน อัปเดตคิวงาน และติดตามสถานะความคืบหน้าของงานออกแบบต่างๆ จากทางร้านค่ะ
+    </p>
+</div>
+<a href="#" target="_blank" style="display: inline-block; padding: 12px 30px; border-radius: 25px; background: linear-gradient(135deg, var(--primary), var(--secondary)); color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; box-shadow: 0 4px 15px rgba(255,74,162,0.3);">
+    🔗 เข้ากลุ่มอัปเดตงานที่นี่
+</a>
+`;
+}
+}
+
+// ฟังก์ชันควบคุมหน้ารายละเอียด
 function selectTopic(topicName) {
 const cardTitle = document.getElementById('infoCardTitle');
 const cardSub = document.getElementById('infoCardSub');
@@ -318,11 +382,13 @@ const cardDetails = document.getElementById('infoCardDetails');
 const pillSign = document.getElementById('pill-sign');
 const pillSheet = document.getElementById('pill-sheet');
 
-pillSign.classList.remove('active');
-pillSheet.classList.remove('active');
+if(pillSign && pillSheet) {
+    pillSign.classList.remove('active');
+    pillSheet.classList.remove('active');
+}
 
 if (topicName === 'สั่งงานป้าย') {
-pillSign.classList.add('active'); 
+if(pillSign) pillSign.classList.add('active'); 
 cardTitle.innerText = "📋 วิธีการสั่งงานป้าย";
 cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งออกแบบป้าย";
 cardDetails.innerHTML = `
@@ -359,7 +425,7 @@ cardDetails.innerHTML = `
 </div>
 `;
 } else if (topicName === 'google sheet') {
-pillSheet.classList.add('active'); 
+if(pillSheet) pillSheet.classList.add('active'); 
 cardTitle.innerText = "📊 ข้อมูลการสั่งงาน Google Sheet";
 cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งทำชีตระบบงาน";
 cardDetails.innerHTML = `
