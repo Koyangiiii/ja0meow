@@ -514,21 +514,30 @@ pillSheet.classList.add('active');
 cardTitle.innerText = "📊 ข้อมูลการสั่งงาน Google Sheet";
 cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งทำชีตระบบงาน";
 cardDetails.innerHTML = `
-<div class="info-row">
-<span>1. ระบุประเภทระบบ</span>
-<span>รายรับ-รายจ่าย / คิวงาน / สต็อก</span>
+<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+<span style="color: var(--primary);">1. แจ้งหัวข้อที่ต้องการใส่ในป้าย</span>
+<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400;">ตัวอย่างเช่น: Q, ชื่อ, วันที่, สถานะ เป็นต้น</span>
 </div>
-<div class="info-row">
-<span>2. แจ้งฟังก์ชันที่ต้องการ</span>
-<span>คำนวณอัตโนมัติ / สรุปกราฟ</span>
+<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+<span style="color: var(--primary);">2. แจ้งหัวข้อที่มีตัวเลือกพร้อมรายละเอียด</span>
+<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400; line-height: 1.5;">
+แจ้งตัวเลือกที่ต้องการให้กับทางร้าน เช่น:<br>
+สถานะ: -รอคิว -เริ่มงาน -เช็คงาน -แก้งาน -ส่งงาน
+</span>
 </div>
-<div class="info-row">
-<span>3. รูปแบบการส่งมอบ</span>
-<span>แชร์สิทธิ์ลิงก์ไฟล์ Google Sheet</span>
+<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+<span style="color: var(--primary);">3. แจ้งโทนสีที่อยากได้</span>
+<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400;">สามารถแจ้งเป็นโค้ดสี (Hex Code) หรือแนบพาเลทสีที่ต้องการมาให้ทางร้านได้เลยค่ะ</span>
 </div>
-<div class="info-row">
-<span>การดูแลหลังการขาย</span>
-<span>แนะนำวิธีใช้งานและแก้ไขสูตรฟรี 7 วัน</span>
+<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px; border-bottom: 1px dashed rgba(255,255,255,0.1);">
+<span style="color: #ff9ecf; font-weight: 600;">🔋 ชี้แจงเรื่องแถบสถานะจากทางร้าน</span>
+<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400; line-height: 1.5;">
+หากลูกค้าต้องการใส่<b>แถบสถานะ (หลอดสถานะ)</b> โปรดแจ้งให้ทางร้านทราบล่วงหน้า โดยลูกค้าจะได้รับไฟล์สถานะทั้งหมด <b>5 ไฟล์</b> ในราคาเริ่มต้นเพียง <b style="color: var(--secondary);">50.- บาท</b> เท่านั้นค่ะ
+</span>
+</div>
+<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+<span style="color: var(--secondary); font-weight: 600;">💎 บริการเสริมและการดูแล</span>
+<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400;">มีระบบคำนวณอัตโนมัติ / สรุปกราฟ และบริการแนะนำวิธีใช้งานพร้อมแก้ไขสูตรฟรี 7 วันหลังส่งมอบงาน</span>
 </div>
 `;
 }
