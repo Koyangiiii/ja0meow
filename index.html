@@ -172,6 +172,25 @@ text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
 }
 .contact-icon { font-size: 16px; transition: transform 0.25s ease; }
 .contact-item:hover .contact-icon { transform: scale(1.15); }
+
+/* GALLERY */
+.gallery-scroll {
+display: flex;
+overflow-x: auto;
+gap: 15px;
+padding: 10px 0;
+scroll-snap-type: x mandatory;
+scrollbar-width: none;
+}
+.gallery-scroll::-webkit-scrollbar { display: none; }
+.gallery-img {
+width: 200px;
+height: 200px;
+object-fit: cover;
+border-radius: 15px;
+scroll-snap-align: start;
+border: 2px solid rgba(255, 74, 162, 0.3);
+}
 </style>
 </head>
 <body>
@@ -253,6 +272,20 @@ text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
     <p style="margin-bottom: 0; display: flex; justify-content: space-between;"><span>🔋 หลอดสถานะ (5 ไฟล์)</span> <b style="color: #ff9ecf;">เริ่มต้น ฿50.-</b></p>
 </div>
 </div>
+
+<div style="margin-top: 30px;">
+    <p style="font-weight: 700; color: var(--primary); margin-bottom: 15px; font-size: 16px;">✨ ตัวอย่างงาน</p>
+    <div class="gallery-scroll">
+        <img src="https://i.postimg.cc/0QzdR8Nw/ipv-block-review5-20260708123725.png" class="gallery-img">
+        <img src="https://i.postimg.cc/50XqdxtQ/ipv-block-review5-20260708123753.png" class="gallery-img">
+        <img src="https://i.postimg.cc/hjXbWSG7/ipv-block-review5-20260708123941.png" class="gallery-img">
+        <img src="https://i.postimg.cc/vmqLN1Gx/ipv-block-review5-20260708124031.png" class="gallery-img">
+    </div>
+    <div style="text-align: center; margin-top: 15px;">
+        <a href="https://drive.google.com/drive/folders/1-ZCQx_5hfZQ908UkYFCtNLYQX6HGaqlq" style="color: var(--secondary); text-decoration: none; font-weight: 600; font-size: 14px;">ตัวอย่างงานเพิ่มเติม</a>
+    </div>
+</div>
+
 </div>
 </div>
 
