@@ -22,7 +22,6 @@ background: var(--bg-main); color: #fff;
 overflow-x: hidden;
 padding-top: 70px; 
 }
-/* Background Glow Effects */
 .bg-glow-1 {
 position: fixed; top: -100px; left: -100px; width: 300px; height: 300px;
 background: radial-gradient(circle, rgba(255,74,162,0.15) 0%, rgba(0,0,0,0) 70%);
@@ -33,7 +32,6 @@ position: fixed; bottom: 20%; right: -150px; width: 400px; height: 400px;
 background: radial-gradient(circle, rgba(255,74,162,0.15) 0%, rgba(0,0,0,0) 70%);
 z-index: -1; pointer-events: none;
 }
-/* Particles */
 #pts { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; }
 .pt { position: absolute; animation: ptUp linear infinite; opacity: 0; }
 @keyframes ptUp {
@@ -42,7 +40,6 @@ z-index: -1; pointer-events: none;
 92% { opacity: 0.45; }
 100% { transform: translateY(-8vh) rotate(360deg); opacity: 0; }
 }
-/* HERO & TABS SECTION */
 .hero {
 background: linear-gradient(135deg, rgba(22, 18, 26, 0.95) 0%, rgba(255, 74, 162, 0.15) 100%);
 padding: 40px 20px 65px;
@@ -75,7 +72,6 @@ background: rgba(255, 74, 162, 0.08); transition: all 0.2s; margin-bottom: 18px;
 box-shadow: 0 0 15px rgba(255, 74, 162, 0.15); text-align: center;
 }
 .queue-btn-dashed:hover { background: rgba(255,74,162,0.18); transform: scale(1.02); }
-
 .tab-container {
 position: absolute;
 bottom: -20px;
@@ -108,7 +104,6 @@ background: linear-gradient(135deg, var(--primary), var(--secondary));
 color: #fff;
 box-shadow: 0 2px 10px rgba(255, 74, 162, 0.3);
 }
-/* CONTENT */
 .content { max-width: 600px; margin: 0 auto; padding: 0 20px 50px; position: relative; z-index: 5; }
 .tab-content { display: none; animation: fadeIn 0.3s ease; }
 .tab-content.active { display: block; }
@@ -116,7 +111,6 @@ box-shadow: 0 2px 10px rgba(255, 74, 162, 0.3);
 from { opacity: 0; transform: translateY(10px); }
 to { opacity: 1; transform: translateY(0); }
 }
-/* INFO TAB */
 .info-card {
 background: var(--bg-card);
 border: 1px solid var(--border-color);
@@ -136,7 +130,6 @@ font-size: 14px;
 .info-row:last-of-type { border-bottom: none; margin-bottom: 20px; }
 .info-row span:first-child { color: var(--primary); font-weight: 600; text-align: left; padding-right: 10px; }
 .info-row span:last-child { color: #fff; font-weight: 500; text-align: right; }
-
 .floating-topics-container { display: flex; gap: 8px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
 .topic-pill {
 background: rgba(255, 74, 162, 0.1); border: 1px solid var(--primary);
@@ -149,8 +142,6 @@ box-shadow: 0 4px 10px rgba(255, 74, 162, 0.1);
 background: var(--primary); color: #fff; border-color: var(--primary);
 box-shadow: 0 4px 12px rgba(255, 74, 162, 0.3);
 }
-
-/* FLOATING TOP CONTACT BAR */
 .floating-contact-bar {
 position: fixed; top: 0; left: 0; right: 0;
 background: rgba(22, 18, 26, 0.98); backdrop-filter: blur(10px);
@@ -208,65 +199,6 @@ text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
 <div class="queue-btn-dashed" onclick="window.open('https://docs.google.com/spreadsheets/d/16wCpceIXo7ZxNgGABYBRbL682miaicVntDUmrrhlns8/edit?usp=drivesdk', '_blank')">
 📋 CheckQ
 </div>
-
-<div style="background: linear-gradient(135deg, rgba(255, 74, 162, 0.15) 0%, rgba(22, 18, 26, 0.8) 100%); border: 1.5px solid var(--primary); padding: 20px; border-radius: 18px; margin-bottom: 20px; text-align: left; box-shadow: 0 0 20px rgba(255, 74, 162, 0.25);">
-    <p style="margin-bottom: 12px; font-size: 16px; font-weight: 700; color: #fff; display: flex; align-items: center; gap: 8px; text-shadow: 0 0 10px rgba(255, 74, 162, 0.5);">
-        <span>🔥</span> โปรโมชันพิเศษสุดคุ้ม!
-    </p>
-    <div style="background: rgba(10, 8, 13, 0.6); padding: 12px 14px; border-radius: 12px; border-left: 4px solid var(--secondary); margin-bottom: 8px;">
-        <p style="font-size: 14px; color: #fff; line-height: 1.5; font-weight: 500;">
-            สั่งงาน <span style="color: var(--secondary); font-weight: 700; font-size: 16px;">3 ป้ายขึ้นไป</span> มีราคาเหมา
-        </p>
-    </div>
-    <p style="font-size: 12px; color: var(--text-muted); display: flex; align-items: center; gap: 4px; padding-left: 4px;">
-        <span>✨</span> สอบถามราคาเพิ่มเติมทักแชททางร้านได้เลยค่ะ
-    </p>
-</div>
-
-<div style="background: rgba(22, 18, 26, 0.6); border: 1px dashed rgba(255, 74, 162, 0.4); padding: 16px; border-radius: 14px; margin-bottom: 24px; text-align: left;">
-    <p style="margin-bottom: 10px; font-size: 14px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 6px;">
-        <span>⚠️</span> เงื่อนไขข้อตกลงในการสั่งงาน
-    </p>
-    <ul style="list-style: none; padding-left: 0; font-size: 12px; color: rgba(255, 255, 255, 0.85); display: flex; flex-direction: column; gap: 8px; line-height: 1.5;">
-        <li style="display: flex; gap: 6px; align-items: flex-start;"><span style="color: var(--secondary)">•</span> <span>ทางร้านจะเริ่มงาน/ลงคิว ต่อเมื่อ<b>จ่ายเต็มจำนวน</b>เท่านั้น</span></li>
-        <li style="display: flex; gap: 6px; align-items: flex-start;"><span style="color: var(--secondary)">•</span> <span>ทางร้าน<b>ไม่มีการโอนเงินคืน</b> ก่อนจะโอนตัดสินใจให้ดีนะคะ</span></li>
-        <li style="display: flex; gap: 6px; align-items: flex-start;"><span style="color: var(--secondary)">•</span> <span>ทางร้าน<b>ทำงานตามคิว ไม่มีรับงานเร่ง</b> และไม่มีการโอนเพื่อเร่งคิวงานทุกกรณี</span></li>
-    </ul>
-</div>
-
-<div style="text-align: left; font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.9); margin-bottom: 20px;">
-<p style="margin-bottom: 12px; font-size: 16px; font-weight: 700; color: var(--primary); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px;">
-    <span>✨</span> เรทราคางานออกแบบ
-</p>
-<div style="background: rgba(255, 74, 162, 0.04); border-left: 3px solid var(--primary); padding: 8px 12px; border-radius: 0 8px 8px 0; margin-bottom: 18px;">
-    <p style="margin-bottom: 5px; display: flex; justify-content: space-between;"><span>💧 ลายน้ำ</span> <b style="color: #ff9ecf;">เริ่มต้น ฿29.-</b></p>
-    <p style="margin-bottom: 5px; display: flex; justify-content: space-between;"><span>🎨 โลโก้</span> <b style="color: #ff9ecf;">เริ่มต้น ฿39.-</b></p>
-    <p style="margin-bottom: 0; display: flex; justify-content: space-between;"><span>💳 งานป้าย</span> <b style="color: #ff9ecf;">เริ่มต้น ฿59.-</b></p>
-</div>
-
-<p style="margin-bottom: 12px; font-size: 16px; font-weight: 700; color: var(--secondary); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px;">
-    <span>📊</span> Google Sheet
-</p>
-<div style="background: rgba(255, 126, 187, 0.04); border-left: 3px solid var(--secondary); padding: 8px 12px; border-radius: 0 8px 8px 0; margin-bottom: 10px;">
-    <p style="margin-bottom: 5px; display: flex; justify-content: space-between;"><span>📅 คิวชีต</span> <b style="color: #ff9ecf;">เริ่มต้น ฿49.-</b></p>
-    <p style="margin-bottom: 5px; display: flex; justify-content: space-between;"><span>📈 ชีตรายรับ - รายจ่าย</span> <b style="color: #ff9ecf;">เริ่มต้น ฿69.-</b></p>
-    <p style="margin-bottom: 0; display: flex; justify-content: space-between;"><span>🔋 หลอดสถานะ (5 ไฟล์)</span> <b style="color: #ff9ecf;">เริ่มต้น ฿50.-</b></p>
-</div>
-</div>
-
-<div style="margin: 25px 0 15px; text-align: left;">
-<p style="font-size: 14px; font-weight: 600; color: var(--secondary); margin-bottom: 10px;">✨ ตัวอย่างผลงาน :</p>
-<div style="display: flex; overflow-x: auto; gap: 12px; padding-bottom: 10px; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; align-items: center;">
-<img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=400&auto=format&fit=crop&q=60" alt="ตัวอย่างงานดีไซน์ 1" style="flex: 0 0 55%; width: 55%; aspect-ratio: 1 / 1; height: auto; object-fit: cover; border-radius: 12px; border: 1px solid var(--border-color); scroll-snap-align: start;">
-<img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=400&auto=format&fit=crop&q=60" alt="ตัวอย่างระบบชีต 2" style="flex: 0 0 55%; width: 55%; aspect-ratio: 1 / 1; height: auto; object-fit: cover; border-radius: 12px; border: 1px solid var(--border-color); scroll-snap-align: start;">
-<img src="https://images.unsplash.com/photo-1626785774573-4b799315345d?w=400&auto=format&fit=crop&q=60" alt="ตัวอย่างงานดีไซน์ 3" style="flex: 0 0 55%; width: 55%; aspect-ratio: 1 / 1; height: auto; object-fit: cover; border-radius: 12px; border: 1px solid var(--border-color); scroll-snap-align: start;">
-<div style="flex: 0 0 55%; width: 55%; aspect-ratio: 1 / 1; display: flex; justify-content: center; align-items: center; background: rgba(255, 74, 162, 0.05); border: 2px dashed var(--border-color); border-radius: 12px; scroll-snap-align: start;">
-<a href="https://drive.google.com/drive/folders/1-ZCQx_5hfZQ908UkYFCtNLYQX6HGaqlq" target="_blank" style="color: #fff; text-decoration: none; font-size: 14px; font-weight: 600; background: linear-gradient(135deg, var(--primary), var(--secondary)); padding: 12px 24px; border-radius: 20px; box-shadow: 0 4px 12px rgba(255, 74, 162, 0.3); transition: transform 0.2s; white-space: nowrap;">
-📂 ตัวอย่างเพิ่มเติม
-</a>
-</div>
-</div>
-</div>
 </div>
 </div>
 
@@ -285,18 +217,11 @@ text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
 <div id="tab-products" class="tab-content">
     <div class="floating-topics-container">
         <div class="topic-pill active" onclick="filterProducts('ทั้งหมด', this)">กลุ่มทั้งหมด</div>
-        <div class="topic-pill" onclick="filterProducts('รวม', this)">กลุ่มรวม</div>
-        <div class="topic-pill" onclick="filterProducts('ตูน', this)">กลุ่มตูน</div>
-        <div class="topic-pill" onclick="filterProducts('บล็อก', this)">กลุ่มบล็อก</div>
-        <div class="topic-pill" onclick="filterProducts('ของตกแต่ง', this)">กลุ่มของตกแต่ง</div>
-        <div class="topic-pill" onclick="filterProducts('สอน', this)">กลุ่มสอน</div>
     </div>
 </div>
-
 </div>
 
 <script>
-// Particles Effect
 const P = document.getElementById('pts');
 ['✦', '★', '✨', '✧', '★'].forEach(e => {
 for (let j = 0; j < 3; j++) {
@@ -307,7 +232,6 @@ P.appendChild(d);
 }
 });
 
-// TAB SWITCH LOGIC
 function switchTab(tabId) {
 document.getElementById('btn-home').classList.remove('active');
 document.getElementById('btn-info').classList.remove('active');
@@ -317,7 +241,6 @@ document.getElementById('tab-home').classList.remove('active');
 document.getElementById('tab-info').classList.remove('active');
 document.getElementById('tab-products').classList.remove('active');
 document.getElementById(`tab-${tabId}`).classList.add('active');
-
 if (tabId === 'info') { selectTopic('สั่งงานป้าย'); }
 }
 
@@ -327,74 +250,28 @@ const cardSub = document.getElementById('infoCardSub');
 const cardDetails = document.getElementById('infoCardDetails');
 const pillSign = document.getElementById('pill-sign');
 const pillSheet = document.getElementById('pill-sheet');
-
 pillSign.classList.remove('active');
 pillSheet.classList.remove('active');
 
 if (topicName === 'สั่งงานป้าย') {
 pillSign.classList.add('active'); 
 cardTitle.innerText = "📋 วิธีการสั่งงานป้าย";
-cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งออกแบบป้าย";
 cardDetails.innerHTML = `
 <div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
-<span style="color: var(--primary);">1. เลือกบล็อก/ของตกแต่ง/ตัวตูน</span>
-<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400;">(หากบล็อกไหนที่ใส่รูปได้สามารถแจ้งทางร้านได้ว่าอยากใส่รูปหรือตัวตูน)</span>
+<span style="color: var(--primary);">🛠️ การแก้งาน</span>
+<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400;">หากลูกค้าต้องการแก้งานหลังจากที่มีการส่งงานแล้ว ทางร้านคิดค่าแก้ จุดละ 15฿</span>
 </div>
-<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
-<span style="color: var(--primary);">2. แจ้งโทนสี</span>
-<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400;">สามารถเอารหัสสีหรือพาเลทสีที่ต้องการได้ค่ะ</span>
-</div>
-<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
-<span style="color: var(--primary);">3. แจ้งรายละเอียด</span>
-<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400;">ที่ต้องการจะใส่ในป้าย สามารถอ้างอิงจากบล็อกที่เลือกได้</span>
-</div>
-<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px; border-bottom: 1px dashed rgba(255,255,255,0.1);">
-<span style="color: #ff9ecf; font-weight: 600;">⚠️ ข้อกำหนดการส่งรายละเอียด</span>
-<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400; line-height: 1.5;">
-- ลูกค้าต้องพิมพ์ส่งให้ทางร้านเท่านั้น<br>
-- ก่อนส่งรายละเอียดให้ทางร้าน ลูกค้าเช็ครายละเอียดก่อนส่งให้ทางร้านก่อนนะคะ ทางร้านใส่ข้อความตามที่ลูกค้าแจ้งมานะคะ<br>
-- ไม่เพิ่มบรีฟ เอาบรีฟออก เพิ่มหรือลดข้อมูลที่ต้องการใส่ในงาน หลังจากที่โอนเงินแล้ว
-</span>
-</div>
-<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
-<span style="color: var(--primary); font-weight: 700; font-size: 15px; letter-spacing: 0.5px;">🛠️ การแก้งาน</span>
-<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400; line-height: 1.5;">
-- สามารถแก้ได้จนกว่าจะพอใจ แต่ต้องอยู่ในขอบเขตการบรีฟงานครั้งแรกหากส่งงานแล้วจะไม่สามารถแก้งานย้อนหลังได้<br>
-- <b style="color: #ff9ecf;">การแก้งาน</b> = ไม่สามารถเปลี่ยนบรีฟ เพิ่มบรีฟ ของตกแต่ง ตัวตูน บล็อก โทนสี ที่ลูกค้าแจ้งไว้ตั้งแต่แรก<br>
-- <b style="color: #ff9ecf;">การแก้ชื่อร้าน/หัวป้าย</b> หากแจ้งผิดและจะแก้หลังจากที่ทำไปแล้ว ทางร้านมีการคิดค่าแก้นะคะเพราะต้องทำใหม่ทั้งหัวป้าย<br>
-- <b style="color: #ff9ecf;">การแก้โทนสี</b> หากแจ้งแค่พิมพ์โทนสีที่อยากได้จะไม่สามารถแก้โทนสีได้<br>
-- เพราะฉะนั้นหากทางร้านส่งงานให้เช็ค ขอความร่วมมือลูกค้าเช็คงานให้ละเอียดก่อนแจ้งให้ทางร้านส่งงานให้<br>
-- หากลูกค้าต้องการแก้งานหลังจากที่มีการส่งงานแล้ว ทางร้านคิดค่าแก้ <b style="color: var(--secondary); font-size: 14px;">จุดละ 15฿</b>
-</span>
+<div style="margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+<a href="#" class="queue-btn-dashed" style="padding: 10px; font-size: 12px; margin-bottom: 0;">เลือกบล็อก</a>
+<a href="#" class="queue-btn-dashed" style="padding: 10px; font-size: 12px; margin-bottom: 0;">เลือกของตกแต่ง</a>
+<a href="#" class="queue-btn-dashed" style="padding: 10px; font-size: 12px; margin-bottom: 0;">เลือกตัวตูน</a>
+<a href="#" class="queue-btn-dashed" style="padding: 10px; font-size: 12px; margin-bottom: 0;">เลือกฟอนต์</a>
 </div>
 `;
-} else if (topicName === 'google sheet') {
-pillSheet.classList.add('active'); 
-cardTitle.innerText = "📊 ข้อมูลการสั่งงาน Google Sheet";
-cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งทำชีตระบบงาน";
-cardDetails.innerHTML = `
-<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
-<span style="color: var(--primary);">1. แจ้งหัวข้อที่ต้องการใส่ในป้าย</span>
-<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400;">ตัวอย่างเช่น: Q, ชื่อ, วันที่, สถานะ เป็นต้น</span>
-</div>
-<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
-<span style="color: var(--primary);">2. แจ้งหัวข้อที่มีตัวเลือกพร้อมรายละเอียด</span>
-<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400; line-height: 1.5;">
-แจ้งตัวเลือกที่ต้องการให้กับทางร้าน เช่น:<br>
-สถานะ: -รอคิว -เริ่มงาน -เช็คงาน -แก้งาน -ส่งงาน
-</span>
-</div>
-<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
-<span style="color: var(--primary);">3. แจ้งโทนสีที่อยากได้</span>
-<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400;">สามารถแจ้งเป็นโค้ดสี (Hex Code) หรือแนบพาเลทสีที่ต้องการมาให้ทางร้านได้เลยค่ะ</span>
-</div>
-<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
-<span style="color: #ff9ecf; font-weight: 600;">🔋 ชี้แจงเรื่องแถบสถานะจากทางร้าน</span>
-<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400; line-height: 1.5;">
-หากลูกค้าต้องการใส่<b>แถบสถานะ (หลอดสถานะ)</b> โปรดแจ้งให้ทางร้านทราบล่วงหน้า โดยลูกค้าจะได้รับไฟล์สถานะทั้งหมด <b>5 ไฟล์</b> ในราคาเริ่มต้นเพียง <b style="color: var(--secondary);">50.- บาท</b> เท่านั้นค่ะ
-</span>
-</div>
-`;
+} else {
+pillSheet.classList.add('active');
+cardTitle.innerText = "📊 ข้อมูล Google Sheet";
+cardDetails.innerHTML = `<p>เนื้อหา Google Sheet</p>`;
 }
 }
 
