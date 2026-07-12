@@ -190,13 +190,6 @@ object-fit: cover;
 border-radius: 15px;
 scroll-snap-align: start;
 border: 2px solid rgba(255, 74, 162, 0.3);
-transition: all 0.3s ease;
-}
-.gallery-img:hover {
-border-color: #fff;
-transform: scale(1.05);
-box-shadow: 0 0 20px rgba(255, 74, 162, 0.5);
-cursor: pointer;
 }
 </style>
 </head>
@@ -249,18 +242,47 @@ cursor: pointer;
     </p>
 </div>
 
+<div style="background: rgba(22, 18, 26, 0.6); border: 1px dashed rgba(255, 74, 162, 0.4); padding: 16px; border-radius: 14px; margin-bottom: 24px; text-align: left;">
+    <p style="margin-bottom: 10px; font-size: 14px; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 6px;">
+        <span>⚠️</span> เงื่อนไขข้อตกลงในการสั่งงาน
+    </p>
+    <ul style="list-style: none; padding-left: 0; font-size: 12px; color: rgba(255, 255, 255, 0.85); display: flex; flex-direction: column; gap: 8px; line-height: 1.5;">
+        <li style="display: flex; gap: 6px; align-items: flex-start;"><span style="color: var(--secondary)">•</span> <span>ทางร้านจะเริ่มงาน/ลงคิว ต่อเมื่อ<b>จ่ายเต็มจำนวน</b>เท่านั้น</span></li>
+        <li style="display: flex; gap: 6px; align-items: flex-start;"><span style="color: var(--secondary)">•</span> <span>ทางร้าน<b>ไม่มีการโอนเงินคืน</b> ก่อนจะโอนตัดสินใจให้ดีนะคะ</span></li>
+        <li style="display: flex; gap: 6px; align-items: flex-start;"><span style="color: var(--secondary)">•</span> <span>ทางร้าน<b>ทำงานตามคิว ไม่มีรับงานเร่ง</b> และไม่มีการโอนเพื่อเร่งคิวงานทุกกรณี</span></li>
+    </ul>
+</div>
+
+<div style="text-align: left; font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.9); margin-bottom: 20px;">
+<p style="margin-bottom: 12px; font-size: 16px; font-weight: 700; color: var(--primary); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px;">
+    <span>✨</span> เรทราคางานออกแบบ
+</p>
+<div style="background: rgba(255, 74, 162, 0.04); border-left: 3px solid var(--primary); padding: 8px 12px; border-radius: 0 8px 8px 0; margin-bottom: 18px;">
+    <p style="margin-bottom: 5px; display: flex; justify-content: space-between;"><span>💧 ลายน้ำ</span> <b style="color: #ff9ecf;">เริ่มต้น ฿29.-</b></p>
+    <p style="margin-bottom: 5px; display: flex; justify-content: space-between;"><span>🎨 โลโก้</span> <b style="color: #ff9ecf;">เริ่มต้น ฿39.-</b></p>
+    <p style="margin-bottom: 0; display: flex; justify-content: space-between;"><span>💳 งานป้าย</span> <b style="color: #ff9ecf;">เริ่มต้น ฿59.-</b></p>
+</div>
+
+<p style="margin-bottom: 12px; font-size: 16px; font-weight: 700; color: var(--secondary); letter-spacing: 0.5px; display: flex; align-items: center; gap: 6px;">
+    <span>📊</span> Google Sheet
+</p>
+<div style="background: rgba(255, 126, 187, 0.04); border-left: 3px solid var(--secondary); padding: 8px 12px; border-radius: 0 8px 8px 0; margin-bottom: 10px;">
+    <p style="margin-bottom: 5px; display: flex; justify-content: space-between;"><span>📅 คิวชีต</span> <b style="color: #ff9ecf;">เริ่มต้น ฿49.-</b></p>
+    <p style="margin-bottom: 5px; display: flex; justify-content: space-between;"><span>📈 ชีตรายรับ - รายจ่าย</span> <b style="color: #ff9ecf;">เริ่มต้น ฿69.-</b></p>
+    <p style="margin-bottom: 0; display: flex; justify-content: space-between;"><span>🔋 หลอดสถานะ (5 ไฟล์)</span> <b style="color: #ff9ecf;">เริ่มต้น ฿50.-</b></p>
+</div>
+</div>
+
 <div style="margin-top: 30px;">
-    <p style="font-weight: 700; color: var(--primary); margin-bottom: 15px; font-size: 16px; border-left: 4px solid var(--primary); padding-left: 10px;">✨ ตัวอย่างงาน</p>
+    <p style="font-weight: 700; color: var(--primary); margin-bottom: 15px; font-size: 16px;">✨ ตัวอย่างงาน</p>
     <div class="gallery-scroll">
         <img src="https://i.postimg.cc/0QzdR8Nw/ipv-block-review5-20260708123725.png" class="gallery-img">
         <img src="https://i.postimg.cc/50XqdxtQ/ipv-block-review5-20260708123753.png" class="gallery-img">
         <img src="https://i.postimg.cc/hjXbWSG7/ipv-block-review5-20260708123941.png" class="gallery-img">
         <img src="https://i.postimg.cc/vmqLN1Gx/ipv-block-review5-20260708124031.png" class="gallery-img">
     </div>
-    <div style="text-align: center; margin-top: 20px;">
-        <a href="https://drive.google.com/drive/folders/1-ZCQx_5hfZQ908UkYFCtNLYQX6HGaqlq" target="_blank" style="display: inline-block; padding: 10px 20px; background: rgba(255, 74, 162, 0.2); border: 1px solid var(--secondary); color: #fff; text-decoration: none; font-weight: 600; font-size: 14px; border-radius: 20px; transition: all 0.3s;">
-            👉 กดดูตัวอย่างงานเพิ่มเติมที่นี่
-        </a>
+    <div style="text-align: center; margin-top: 15px;">
+        <a href="https://drive.google.com/drive/folders/1-ZCQx_5hfZQ908UkYFCtNLYQX6HGaqlq" style="color: var(--secondary); text-decoration: none; font-weight: 600; font-size: 14px;">ตัวอย่างงานเพิ่มเติม</a>
     </div>
 </div>
 
@@ -332,7 +354,8 @@ if (topicName === 'สั่งงานป้าย') {
 pillSign.classList.add('active'); 
 cardTitle.innerText = "📋 วิธีการสั่งงานป้าย";
 cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งออกแบบป้าย";
-cardDetails.innerHTML = `<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+cardDetails.innerHTML = `
+<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
 <span style="color: var(--primary);">1. เลือกบล็อก/ของตกแต่ง/ตัวตูน</span>
 <span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400;">(หากบล็อกไหนที่ใส่รูปได้สามารถแจ้งทางร้านได้ว่าอยากใส่รูปหรือตัวตูน)</span>
 </div>
@@ -351,12 +374,31 @@ cardDetails.innerHTML = `<div class="info-row" style="flex-direction: column; al
 - ก่อนส่งรายละเอียดให้ทางร้าน ลูกค้าเช็ครายละเอียดก่อนส่งให้ทางร้านก่อนนะคะ ทางร้านใส่ข้อความตามที่ลูกค้าแจ้งมานะคะ<br>
 - ไม่เพิ่มบรีฟ เอาบรีฟออก เพิ่มหรือลดข้อมูลที่ต้องการใส่ในงาน หลังจากที่โอนเงินแล้ว
 </span>
-</div>`;
+</div>
+<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+<span style="color: var(--primary); font-weight: 700; font-size: 15px; letter-spacing: 0.5px;">🛠️ การแก้งาน</span>
+<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400; line-height: 1.5;">
+- สามารถแก้ได้จนกว่าจะพอใจ แต่ต้องอยู่ในขอบเขตการบรีฟงานครั้งแรกหากส่งงานแล้วจะไม่สามารถแก้งานย้อนหลังได้<br>
+- หากลูกค้าต้องการแก้งานหลังจากที่มีการส่งงานแล้ว ทางร้านคิดค่าแก้ <b style="color: var(--secondary); font-size: 14px;">จุดละ 15฿</b>
+</span>
+</div>
+
+<div style="margin-top: 20px;">
+<span style="display: block; color: var(--primary); font-weight: 700; font-size: 14px; margin-bottom: 10px;">✨ เลือกของทำป้าย</span>
+<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+<a href="#" class="queue-btn-dashed" style="padding: 10px; font-size: 12px; margin: 0;">เลือกบล็อก</a>
+<a href="#" class="queue-btn-dashed" style="padding: 10px; font-size: 12px; margin: 0;">เลือกของตกแต่ง</a>
+<a href="#" class="queue-btn-dashed" style="padding: 10px; font-size: 12px; margin: 0;">เลือกตัวตูน</a>
+<a href="#" class="queue-btn-dashed" style="padding: 10px; font-size: 12px; margin: 0;">เลือกฟอนต์</a>
+</div>
+</div>
+`;
 } else if (topicName === 'google sheet') {
 pillSheet.classList.add('active'); 
 cardTitle.innerText = "📊 ข้อมูลการสั่งงาน Google Sheet";
 cardSub.innerText = "ขั้นตอนและรายละเอียดสำหรับการสั่งทำชีตระบบงาน";
-cardDetails.innerHTML = `<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+cardDetails.innerHTML = `
+<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
 <span style="color: var(--primary);">1. แจ้งหัวข้อที่ต้องการใส่ในป้าย</span>
 <span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400;">ตัวอย่างเช่น: Q, ชื่อ, วันที่, สถานะ เป็นต้น</span>
 </div>
@@ -370,7 +412,14 @@ cardDetails.innerHTML = `<div class="info-row" style="flex-direction: column; al
 <div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
 <span style="color: var(--primary);">3. แจ้งโทนสีที่อยากได้</span>
 <span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400;">สามารถแจ้งเป็นโค้ดสี (Hex Code) หรือแนบพาเลทสีที่ต้องการมาให้ทางร้านได้เลยค่ะ</span>
-</div>`;
+</div>
+<div class="info-row" style="flex-direction: column; align-items: flex-start; gap: 4px;">
+<span style="color: #ff9ecf; font-weight: 600;">🔋 ชี้แจงเรื่องแถบสถานะจากทางร้าน</span>
+<span style="color: #fff; text-align: left; font-size: 13px; font-weight: 400; line-height: 1.5;">
+หากลูกค้าต้องการใส่<b>แถบสถานะ (หลอดสถานะ)</b> โปรดแจ้งให้ทางร้านทราบล่วงหน้า โดยลูกค้าจะได้รับไฟล์สถานะทั้งหมด <b>5 ไฟล์</b> ในราคาเริ่มต้นเพียง <b style="color: var(--secondary);">50.- บาท</b> เท่านั้นค่ะ
+</span>
+</div>
+`;
 }
 }
 
