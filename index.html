@@ -237,7 +237,7 @@ function switchTab(tabId) {
 function filterProducts(category, element) {
     document.querySelectorAll('.topic-pill').forEach(pill => pill.classList.remove('active'));
     element.classList.add('active');
-    document.getElementById('product-list').innerText = `${category}`;
+    document.getElementById('product-list').innerText = `กำลังแสดงผล: ${category}`;
 }
 </script>
 </body>
