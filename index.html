@@ -400,12 +400,6 @@ cardDetails.innerHTML = `
 `;
 }
 }
-
-function filterProducts(category, el) {
-    document.querySelectorAll('#tab-products .topic-pill').forEach(p => p.classList.remove('active'));
-    el.classList.add('active');
-    document.getElementById('product-display').innerText = category === 'ทั้งหมด' ? 'กลุ่มทั้งหมด' : 'กลุ่ม' + category;
-}
 </script>
 </body>
 </html>
