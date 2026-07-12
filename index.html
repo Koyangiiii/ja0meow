@@ -137,7 +137,7 @@ font-size: 14px;
 .info-row span:first-child { color: var(--primary); font-weight: 600; text-align: left; padding-right: 10px; }
 .info-row span:last-child { color: #fff; font-weight: 500; text-align: right; }
 
-.floating-topics-container { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; }
+.floating-topics-container { display: flex; gap: 10px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
 .topic-pill {
 background: rgba(255, 74, 162, 0.1); border: 1px solid var(--primary);
 color: rgba(255, 255, 255, 0.7); padding: 8px 16px; border-radius: 20px; font-size: 13px;
@@ -179,7 +179,6 @@ text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
 <div class="bg-glow-2"></div>
 <div id="pts"></div>
 
-<!-- แถบติดต่อด้านบนสุด -->
 <div class="floating-contact-bar">
     <a href="https://lin.ee/rI1pkuT" class="contact-item" target="_blank">
         <span class="contact-icon">💬</span><span>เจ้าเหมียวฯ.</span>
@@ -284,8 +283,19 @@ text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
 </div>
 
 <div id="tab-products" class="tab-content">
-<!-- ปล่อยว่างสำหรับเตรียมใส่ข้อมูลกลุ่ม/สินค้าในอนาคตตามต้องการ -->
+    <div class="floating-topics-container">
+        <div class="topic-pill active" onclick="filterProducts('ทั้งหมด', this)">กลุ่มทั้งหมด</div>
+        <div class="topic-pill" onclick="filterProducts('รวม', this)">กลุ่มรวม</div>
+        <div class="topic-pill" onclick="filterProducts('ตูน', this)">กลุ่มตูน</div>
+        <div class="topic-pill" onclick="filterProducts('บล็อก', this)">กลุ่มบล็อก</div>
+        <div class="topic-pill" onclick="filterProducts('ของตกแต่ง', this)">กลุ่มของตกแต่ง</div>
+        <div class="topic-pill" onclick="filterProducts('สอน', this)">กลุ่มสอน</div>
+    </div>
+    <div id="product-display" style="text-align: center; color: var(--text-muted); margin-top: 20px;">
+        กลุ่มทั้งหมด
+    </div>
 </div>
+
 </div>
 
 <script>
@@ -389,6 +399,12 @@ cardDetails.innerHTML = `
 </div>
 `;
 }
+}
+
+function filterProducts(category, el) {
+    document.querySelectorAll('#tab-products .topic-pill').forEach(p => p.classList.remove('active'));
+    el.classList.add('active');
+    document.getElementById('product-display').innerText = 'กลุ่ม' + category;
 }
 </script>
 </body>
