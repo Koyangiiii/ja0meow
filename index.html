@@ -291,9 +291,6 @@ text-shadow: 0 0 8px rgba(255, 74, 162, 0.4);
         <div class="topic-pill" onclick="filterProducts('ของตกแต่ง', this)">กลุ่มของตกแต่ง</div>
         <div class="topic-pill" onclick="filterProducts('สอน', this)">กลุ่มสอน</div>
     </div>
-    <div id="product-display" style="text-align: center; color: var(--text-muted); margin-top: 20px; font-weight: 600;">
-        ทั้งหมด
-    </div>
 </div>
 
 </div>
@@ -404,7 +401,6 @@ cardDetails.innerHTML = `
 function filterProducts(category, el) {
     document.querySelectorAll('#tab-products .topic-pill').forEach(p => p.classList.remove('active'));
     el.classList.add('active');
-    document.getElementById('product-display').innerText = category === 'ทั้งหมด' ? 'กลุ่มทั้งหมด' : 'กลุ่ม' + category;
 }
 </script>
 </body>
