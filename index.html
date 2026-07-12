@@ -56,8 +56,13 @@ box-shadow: 0 4px 30px rgba(255, 74, 162, 0.1);
 .hero-title {
 font-family: 'Mitr', sans-serif;
 font-size: 38px; font-weight: 800; color: #fff;
-margin-bottom: 8px; letter-spacing: 0.5px;
+margin-bottom: 4px; letter-spacing: 0.5px;
 text-shadow: 0 0 15px rgba(255, 74, 162, 0.6);
+}
+.hero-time {
+font-size: 14px; font-weight: 500; color: var(--secondary);
+margin-bottom: 8px; letter-spacing: 0.5px;
+text-shadow: 0 0 8px rgba(255, 126, 187, 0.4);
 }
 .hero-sub {
 font-size: 13px; color: rgba(255,255,255,0.85);
@@ -289,7 +294,7 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 <div class="bg-glow-2"></div>
 <div id="pts"></div>
 
-<!-- แถบติดต่อด้านบนสุด (คงไว้ตามบรีฟเดิม) -->
+<!-- แถบติดต่อด้านบนสุด -->
 <div class="floating-contact-bar">
     <a href="https://lin.ee/rI1pkuT" class="contact-item" target="_blank">
         <span class="contact-icon">💬</span><span>เจ้าเหมียวฯ.</span>
@@ -303,8 +308,9 @@ box-shadow: 0 4px 15px rgba(0,211,0,0.3); transition: transform 0.2s;
 </div>
 
 <div class="hero">
-<!-- ส่วนของไฟสถานะกลม ๆ ถูกนำออกเรียบร้อยแล้ว -->
 <div class="hero-title">JaoMeowStore</div>
+<!-- เพิ่มเวลาเปิด-ปิดร้านกลับมาเรียบร้อยครับ -->
+<div class="hero-time">OPEN - CLOSE : 09.00 - 22.00</div>
 <div class="hero-sub">เจ้าเหมียวรับทำ ป้าย โลโก้ ลายน้ำ คิวชีต ชีตรายรับ - รายจ่าย</div>
 <div class="tab-container">
 <button class="tab-btn active" id="btn-home" onclick="switchTab('home')">หน้าหลัก</button>
